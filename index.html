@@ -1,58 +1,62 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="AE CLOTHING — Modern Luxury Streetwear">
-  <title>AE CLOTHING | Modern Luxury Streetwear</title>
+  <title>AE CLOTHING | The Collection</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="header">
-    <a class="logo" href="#">AE<span>.</span></a>
-    <nav><a href="#home">الرئيسية</a><a href="#collections">المجموعات</a><a href="#about">عن AE</a><a href="#contact">تواصل معنا</a></nav>
-    <button id="cart-toggle" class="cart-button">السلة <span id="cart-count">0</span></button>
-  </header>
 
-  <main>
-    <section id="home" class="hero">
-      <p class="eyebrow">MODERN LUXURY STREETWEAR</p>
-      <h1>أسلوبك.<br><span>هويتك.</span></h1>
-      <p>بساطة تلفت الانتباه. قطع مصممة للرجل الواثق.</p>
-      <a class="button" href="#collections">اكتشف المجموعة</a>
-    </section>
+<header class="header">
+  <a class="logo" href="#home">AE<span>.</span></a>
+  <nav>
+    <a href="#home">الرئيسية</a>
+    <a href="#collections">المجموعة</a>
+    <a href="#about">عن AE</a>
+    <a href="#contact">تواصل</a>
+  </nav>
+  <a class="header-contact" href="https://wa.me/201142336180" target="_blank">تواصل معنا</a>
+</header>
 
-    <section id="collections" class="section">
-      <p class="eyebrow">THE COLLECTION</p>
-      <h2>اكتشف AE CLOTHING</h2>
-      <div class="filters">
-        <input id="search" type="search" placeholder="ابحث عن منتج...">
-        <select id="category"><option value="all">كل المنتجات</option><option value="tshirt">تيشيرتات</option><option value="long">كم طويل</option><option value="hoodie">هوديز</option></select>
+<main>
+  <section id="home" class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">AE CLOTHING — EST. 2026</p>
+      <h1>BE YOUR<br><span>OWN STANDARD.</span></h1>
+      <p class="hero-ar">أسلوب واضح. تفاصيل محسوبة. حضور من غير مبالغة.</p>
+      <a class="hero-link" href="#collections">اكتشف المجموعة <span>←</span></a>
+    </div>
+    <div class="hero-mark">AE</div>
+  </section>
+
+  <section id="collections" class="section collection">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">THE FIRST DROP</p>
+        <h2>مختارات AE</h2>
       </div>
-      <div id="products" class="products">
-        <div class="empty"><span>AE</span><h3>المجموعة الأولى قريباً</h3><p>ترقبوا إطلاق أول مجموعة من AE CLOTHING.</p></div>
-      </div>
-    </section>
+      <p class="section-note">اكتشف القطع المتاحة قريباً</p>
+    </div>
+    <div id="products" class="products"></div>
+  </section>
 
-    <section id="about" class="about section">
-      <p class="eyebrow">ABOUT THE BRAND</p><h2>Less, but better.</h2>
-      <p>AE CLOTHING علامة ملابس رجالي بروح عصرية، تجمع بين الأناقة والبساطة والثقة. تصميمات واضحة وتفاصيل مدروسة.</p>
-    </section>
-  </main>
+  <section id="about" class="about">
+    <p class="eyebrow">ABOUT THE BRAND</p>
+    <h2>Less, but better.</h2>
+    <p>AE CLOTHING علامة ملابس رجالي بروح عصرية، تجمع بين البساطة والجودة والتفاصيل المدروسة.</p>
+  </section>
+</main>
 
-  <aside id="cart" class="cart" aria-label="سلة المشتريات">
-    <button id="cart-close" class="close">×</button><h2>سلة المشتريات</h2>
-    <div id="cart-items">السلة فارغة حالياً.</div>
-    <p id="cart-total"></p>
-    <button id="checkout" class="button">إتمام الطلب عبر واتساب</button>
-  </aside>
+<footer id="contact">
+  <a class="logo" href="#home">AE<span>.</span></a>
+  <p>MODERN LUXURY STREETWEAR</p>
+  <a href="https://wa.me/201142336180" target="_blank">تواصل معنا عبر واتساب</a>
+  <small>© <span id="year"></span> AE CLOTHING. All rights reserved.</small>
+</footer>
 
-  <footer id="contact">
-    <a class="logo" href="#">AE<span>.</span></a>
-    <p>Modern Luxury Streetwear</p>
-    <a href="https://wa.me/201142336180" target="_blank" rel="noopener">تواصل معنا عبر واتساب</a>
-    <small>© <span id="year"></span> AE CLOTHING. All rights reserved.</small>
-  </footer>
-  <script src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
