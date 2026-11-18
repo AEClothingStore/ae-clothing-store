@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -7,456 +6,150 @@
   <meta name="theme-color" content="#430008">
   <meta name="description" content="AZAZY CLOTHES — Wear Your Style">
   <title>AZAZY CLOTHES | Wear Your Style</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="styles.css">
-
   <style>
-    /* Logo replaces the circle without changing the rest */
-    .hero-mark {
-      position: relative;
-    }
-
-    .hero-mark .fabric-orbit {
-      display: none !important;
-    }
-
-    .hero-mark .hero-logo {
-      position: absolute;
-      display: block;
-      width: 100%;
-      height: 100%;
-      inset: 0;
-      object-fit: contain;
-      transform: none;
-      mix-blend-mode: screen;
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    .hero-mark .hero-caption {
-      position: relative;
-      z-index: 3;
-    }
-
-    @media (max-width: 760px) {
-      .hero-mark .hero-logo {
-        width: 100%;
-        height: 100%;
-      }
-    }
-
-    /* AZAZY Order Success */
-    .azazy-success {
-      position: fixed;
-      inset: 0;
-      z-index: 99999;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background: rgba(20, 0, 3, .82);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-
-    .azazy-success.show {
-      display: flex;
-    }
-
-    .azazy-success-card {
-      width: 100%;
-      max-width: 430px;
-      padding: 35px 25px;
-      text-align: center;
-      background: #f8f2e9;
-      border: 1px solid #c5a46b;
-      border-radius: 18px;
-      box-shadow: 0 20px 70px rgba(0,0,0,.4);
-      animation: azazySuccessIn .35s ease;
-    }
-
-    @keyframes azazySuccessIn {
-      from {
-        opacity: 0;
-        transform: translateY(18px) scale(.97);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    .azazy-success-icon {
-      width: 68px;
-      height: 68px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      border-radius: 50%;
-      color: #f8f2e9;
-      background: #430008;
-      font-size: 35px;
-      border: 2px solid #c5a46b;
-    }
-
-    .azazy-success-brand {
-      color: #9a7948;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 17px;
-      letter-spacing: 3px;
-      margin-bottom: 12px;
-    }
-
-    .azazy-success-card h2 {
-      color: #430008;
-      font-family: 'Almarai', sans-serif;
-      font-size: 23px;
-      margin: 0 0 12px;
-    }
-
-    .azazy-success-card p {
-      color: #665b55;
-      font-family: 'Almarai', sans-serif;
-      font-size: 14px;
-      line-height: 1.9;
-      margin: 0 0 20px;
-    }
-
-    .azazy-order-number {
-      padding: 15px;
-      margin: 20px 0;
-      border: 1px dashed #b69765;
-      border-radius: 10px;
-      background: #fffaf2;
-    }
-
-    .azazy-order-number span {
-      display: block;
-      color: #796b5c;
-      font-size: 12px;
-      margin-bottom: 8px;
-    }
-
-    .azazy-order-number strong {
-      display: block;
-      direction: ltr;
-      color: #430008;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 25px;
-      letter-spacing: 1px;
-    }
-
-    .azazy-success-button {
-      width: 100%;
-      padding: 14px 20px;
-      border: 0;
-      border-radius: 8px;
-      background: #430008;
-      color: #fff;
-      font-family: 'Almarai', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: .2s;
-    }
-
-    .azazy-success-button:hover {
-      background: #650d19;
-    }
-
-    .azazy-success-note {
-      display: block;
-      margin-top: 15px;
-      color: #8a7b6a;
-      font-size: 11px;
-    }
+    .hero-mark { position: relative; }
+    .hero-mark .fabric-orbit { display: none !important; }
+    .hero-mark .hero-logo { position:absolute;display:block;width:100%;height:100%;inset:0;object-fit:contain;transform:none;mix-blend-mode:screen;z-index:2;pointer-events:none; }
+    .hero-mark .hero-caption { position:relative;z-index:3; }
+    @media(max-width:760px){.hero-mark .hero-logo{width:100%;height:100%;}}
   </style>
 </head>
-
 <body>
-
-  <div class="announcement">
-    <span></span>
-    AZAZY CLOTHES — WEAR YOUR STYLE
-    <span></span>
-  </div>
-
+  <div class="announcement"><span></span>AZAZY CLOTHES — WEAR YOUR STYLE<span></span></div>
   <header class="site-header">
-    <a class="brand" href="#home">
-      <img src="assets/azazy-logo.png" alt="AZAZY CLOTHES">
-    </a>
-
+    <a class="brand" href="#home"><img src="assets/azazy-logo.png" alt="AZAZY CLOTHES"></a>
     <button class="menu-toggle" id="menu-toggle">☰</button>
-
-    <nav id="main-nav">
-      <a href="#home">الرئيسية</a>
-      <a href="#collection">المجموعة</a>
-      <a href="#story">عن AZAZY</a>
-      <a href="#contact">تواصل معنا</a>
-    </nav>
-
-    <button class="bag-button" id="cart-toggle">
-      السلة <b id="cart-count">0</b>
-    </button>
+    <nav id="main-nav"><a href="#home">الرئيسية</a><a href="#collection">المجموعة</a><a href="#story">عن AZAZY</a><a href="#contact">تواصل معنا</a></nav>
+    <button class="bag-button" id="cart-toggle">السلة <b id="cart-count">0</b></button>
   </header>
-
   <main>
     <section class="hero" id="home">
-
       <div class="hero-text">
         <p class="eyebrow">MODERN MENSWEAR</p>
+        <h1>BE YOUR<br><em>OWN STANDARD.</em></h1>
+        <p class="hero-copy">أسلوب يعبر عنك. تفاصيل بسيطة، حضور لا يُنسى.</p>
+        <a class="outline-button" href="#collection">اكتشف المجموعة <span>←</span></a>
+      </div>
 
-        <h1>
-          BE YOUR<br>
-          <em>OWN STANDARD.</em>
-        </h1>
-
-        <p class="hero-copy">
-          أسلوب يعبر عنك. تفاصيل بسيطة، حضور لا يُنسى.
-        </p>
-
-        <a class="outline-button" href="#collection">
-          اكتشف المجموعة <span>←</span>
-        </a>
+      <!-- Interactive AZAZY hoodie hanger -->
+      <div class="hero-hanger" aria-label="تشكيلة هوديز AZAZY المتحركة">
+        <div class="hanger-glow"></div>
+        <div class="hanger-rail"><span></span></div>
+        <div class="hanger-track">
+          <div class="hanger-item hoodie-wine" data-slot="0" aria-hidden="true">
+            <span class="hanger-hook"></span>
+            <svg viewBox="0 0 220 260" role="img" aria-label="هودي برغندي">
+              <path class="hoodie-body" d="M76 48 Q79 17 110 14 Q141 17 144 48 L171 60 Q190 68 198 91 L216 165 L178 178 L165 132 L165 242 Q110 257 55 242 L55 132 L42 178 L4 165 L22 91 Q30 68 49 60 Z"/>
+              <path class="hoodie-hood" d="M76 48 Q79 17 110 14 Q141 17 144 48 L132 66 Q110 50 88 66 Z"/>
+              <path class="hoodie-detail" d="M88 66 Q110 52 132 66 M100 70 L96 94 M120 70 L124 94"/>
+              <path class="hoodie-pocket" d="M78 157 Q110 171 142 157 L136 194 Q110 204 84 194 Z"/>
+              <path class="hoodie-seam" d="M55 132 L55 242 M165 132 L165 242"/>
+              <text x="110" y="225" text-anchor="middle" class="hoodie-brand">AZAZY</text>
+            </svg>
+          </div>
+          <div class="hanger-item hoodie-ivory" data-slot="1" aria-hidden="true">
+            <span class="hanger-hook"></span>
+            <svg viewBox="0 0 220 260" role="img" aria-label="هودي أوف وايت">
+              <path class="hoodie-body" d="M76 48 Q79 17 110 14 Q141 17 144 48 L171 60 Q190 68 198 91 L216 165 L178 178 L165 132 L165 242 Q110 257 55 242 L55 132 L42 178 L4 165 L22 91 Q30 68 49 60 Z"/>
+              <path class="hoodie-hood" d="M76 48 Q79 17 110 14 Q141 17 144 48 L132 66 Q110 50 88 66 Z"/>
+              <path class="hoodie-detail" d="M88 66 Q110 52 132 66 M100 70 L96 94 M120 70 L124 94"/>
+              <path class="hoodie-pocket" d="M78 157 Q110 171 142 157 L136 194 Q110 204 84 194 Z"/>
+              <path class="hoodie-seam" d="M55 132 L55 242 M165 132 L165 242"/>
+              <text x="110" y="225" text-anchor="middle" class="hoodie-brand">AZAZY</text>
+            </svg>
+          </div>
+          <div class="hanger-item hoodie-wine" data-slot="2" aria-hidden="true">
+            <span class="hanger-hook"></span>
+            <svg viewBox="0 0 220 260" role="img" aria-label="هودي برغندي">
+              <path class="hoodie-body" d="M76 48 Q79 17 110 14 Q141 17 144 48 L171 60 Q190 68 198 91 L216 165 L178 178 L165 132 L165 242 Q110 257 55 242 L55 132 L42 178 L4 165 L22 91 Q30 68 49 60 Z"/>
+              <path class="hoodie-hood" d="M76 48 Q79 17 110 14 Q141 17 144 48 L132 66 Q110 50 88 66 Z"/>
+              <path class="hoodie-detail" d="M88 66 Q110 52 132 66 M100 70 L96 94 M120 70 L124 94"/>
+              <path class="hoodie-pocket" d="M78 157 Q110 171 142 157 L136 194 Q110 204 84 194 Z"/>
+              <path class="hoodie-seam" d="M55 132 L55 242 M165 132 L165 242"/>
+              <text x="110" y="225" text-anchor="middle" class="hoodie-brand">AZAZY</text>
+            </svg>
+          </div>
+          <div class="hanger-item hoodie-ivory" data-slot="3" aria-hidden="true">
+            <span class="hanger-hook"></span>
+            <svg viewBox="0 0 220 260" role="img" aria-label="هودي أوف وايت">
+              <path class="hoodie-body" d="M76 48 Q79 17 110 14 Q141 17 144 48 L171 60 Q190 68 198 91 L216 165 L178 178 L165 132 L165 242 Q110 257 55 242 L55 132 L42 178 L4 165 L22 91 Q30 68 49 60 Z"/>
+              <path class="hoodie-hood" d="M76 48 Q79 17 110 14 Q141 17 144 48 L132 66 Q110 50 88 66 Z"/>
+              <path class="hoodie-detail" d="M88 66 Q110 52 132 66 M100 70 L96 94 M120 70 L124 94"/>
+              <path class="hoodie-pocket" d="M78 157 Q110 171 142 157 L136 194 Q110 204 84 194 Z"/>
+              <path class="hoodie-seam" d="M55 132 L55 242 M165 132 L165 242"/>
+              <text x="110" y="225" text-anchor="middle" class="hoodie-brand">AZAZY</text>
+            </svg>
+          </div>
+          <div class="hanger-item hoodie-wine" data-slot="4" aria-hidden="true">
+            <span class="hanger-hook"></span>
+            <svg viewBox="0 0 220 260" role="img" aria-label="هودي برغندي">
+              <path class="hoodie-body" d="M76 48 Q79 17 110 14 Q141 17 144 48 L171 60 Q190 68 198 91 L216 165 L178 178 L165 132 L165 242 Q110 257 55 242 L55 132 L42 178 L4 165 L22 91 Q30 68 49 60 Z"/>
+              <path class="hoodie-hood" d="M76 48 Q79 17 110 14 Q141 17 144 48 L132 66 Q110 50 88 66 Z"/>
+              <path class="hoodie-detail" d="M88 66 Q110 52 132 66 M100 70 L96 94 M120 70 L124 94"/>
+              <path class="hoodie-pocket" d="M78 157 Q110 171 142 157 L136 194 Q110 204 84 194 Z"/>
+              <path class="hoodie-seam" d="M55 132 L55 242 M165 132 L165 242"/>
+              <text x="110" y="225" text-anchor="middle" class="hoodie-brand">AZAZY</text>
+            </svg>
+          </div>
+        </div>
+        <div class="hanger-caption"><span>THE HOODIE EDIT</span><i></i><span>01 — 05</span></div>
       </div>
 
       <div class="hero-mark">
-        <img
-          class="hero-logo"
-          src="assets/azazy-logo.png"
-          alt="AZAZY CLOTHES"
-        >
-
-        <div class="hero-caption">
-          WEAR YOUR STYLE — AZAZY CLOTHES
-        </div>
+        <img class="hero-logo" src="assets/azazy-logo.png" alt="AZAZY CLOTHES">
+        <div class="hero-caption">WEAR YOUR STYLE — AZAZY CLOTHES</div>
       </div>
-
-      <div class="hero-bottom">
-        <span>01 / THE NEW IDENTITY</span>
-        <span>CAIRO · EGYPT</span>
-      </div>
-
+      <div class="hero-bottom"><span>01 / THE NEW IDENTITY</span><span>CAIRO · EGYPT</span></div>
     </section>
 
     <section class="promise">
-      <div>
-        <span class="promise-icon">✳</span>
-        <strong>DESIGNED WITH INTENT</strong>
-        <small>تفاصيل مدروسة</small>
-      </div>
-
-      <div>
-        <span class="promise-icon">◇</span>
-        <strong>EVERYDAY ELEGANCE</strong>
-        <small>أناقة لكل يوم</small>
-      </div>
-
-      <div>
-        <span class="promise-icon">↗</span>
-        <strong>YOUR STYLE, YOUR RULES</strong>
-        <small>أسلوبك له بصمته</small>
-      </div>
+      <div><span class="promise-icon">✳</span><strong>DESIGNED WITH INTENT</strong><small>تفاصيل مدروسة</small></div>
+      <div><span class="promise-icon">◇</span><strong>EVERYDAY ELEGANCE</strong><small>أناقة لكل يوم</small></div>
+      <div><span class="promise-icon">↗</span><strong>YOUR STYLE, YOUR RULES</strong><small>أسلوبك له بصمته</small></div>
     </section>
-
     <section class="collection section" id="collection">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">THE AZAZY EDIT</p>
-          <h2>OUR COLLECTION</h2>
-        </div>
-        <p>اختار القطعة اللي تشبهك.</p>
-      </div>
-
-      <div class="filters">
-        <input id="search" type="search" placeholder="ابحث عن منتج...">
-
-        <select id="category">
-          <option value="all">كل المنتجات</option>
-          <option value="tshirt">تيشيرتات</option>
-          <option value="long">كم طويل</option>
-          <option value="hoodie">هوديز</option>
-        </select>
-      </div>
-
-      <div id="products" class="products-grid">
-        <div class="empty-state">
-          <span>AZAZY</span>
-          <h3>قريباً — المجموعة الأولى</h3>
-          <p>نعمل على تجهيز اختياراتنا بعناية.</p>
-        </div>
-      </div>
+      <div class="section-heading"><div><p class="eyebrow">THE AZAZY EDIT</p><h2>OUR COLLECTION</h2></div><p>اختار القطعة اللي تشبهك.</p></div>
+      <div class="filters"><input id="search" type="search" placeholder="ابحث عن منتج..."><select id="category"><option value="all">كل المنتجات</option><option value="tshirt">تيشيرتات</option><option value="long">كم طويل</option><option value="hoodie">هوديز</option></select></div>
+      <div id="products" class="products-grid"><div class="empty-state"><span>AZAZY</span><h3>قريباً — المجموعة الأولى</h3><p>نعمل على تجهيز اختياراتنا بعناية.</p></div></div>
     </section>
-
     <section class="brand-story" id="story">
-      <div class="story-image">
-        <img src="assets/azazy-logo.png" alt="AZAZY CLOTHES">
-      </div>
-
-      <div class="story-copy">
-        <p class="eyebrow">A NAME. A STATEMENT.</p>
-
-        <h2>
-          MORE THAN<br>
-          <em>JUST CLOTHES.</em>
-        </h2>
-
-        <p>
-          AZAZY CLOTHES هي رؤية للأناقة الرجالية العصرية؛
-          قطع مختارة بعناية لتمنحك حرية التعبير عن أسلوبك بثقة.
-        </p>
-
-        <a href="#collection" class="text-link">
-          اكتشف AZAZY ←
-        </a>
-      </div>
+      <div class="story-image"><img src="assets/azazy-logo.png" alt="AZAZY CLOTHES"></div>
+      <div class="story-copy"><p class="eyebrow">A NAME. A STATEMENT.</p><h2>MORE THAN<br><em>JUST CLOTHES.</em></h2><p>AZAZY CLOTHES هي رؤية للأناقة الرجالية العصرية؛ قطع مختارة بعناية لتمنحك حرية التعبير عن أسلوبك بثقة.</p><a href="#collection" class="text-link">اكتشف AZAZY ←</a></div>
     </section>
   </main>
-
-  <aside class="cart-panel" id="cart">
-    <button class="close-cart" id="cart-close">×</button>
-    <p class="eyebrow">YOUR SELECTION</p>
-    <h2>سلة المشتريات</h2>
-
-    <div id="cart-items">
-      السلة فارغة حالياً.
-    </div>
-
-    <p id="cart-total" class="cart-total"></p>
-
-    <button id="checkout" class="solid-button">
-      إتمام الطلب
-    </button>
-  </aside>
-
+  <aside class="cart-panel" id="cart"><button class="close-cart" id="cart-close">×</button><p class="eyebrow">YOUR SELECTION</p><h2>سلة المشتريات</h2><div id="cart-items">السلة فارغة حالياً.</div><p id="cart-total" class="cart-total"></p><button id="checkout" class="solid-button">اطلب عبر واتساب</button></aside>
   <div class="cart-overlay" id="cart-overlay"></div>
-
-  <div class="checkout-modal" id="checkout-modal" aria-hidden="true">
-    <div class="checkout-card" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
-      <button type="button" class="checkout-close" id="checkout-close" aria-label="إغلاق">×</button>
-      <p class="eyebrow">AZAZY ORDER</p>
-      <h2 id="checkout-title">بيانات توصيل الطلب</h2>
-      <p class="checkout-intro">اكتب بياناتك بشكل صحيح، وهنسجل طلبك ونجهز رسالة واتساب بتفاصيله.</p>
-      <form id="checkout-form">
-        <label>الاسم بالكامل<input name="customer_name" autocomplete="name" required maxlength="100" placeholder="اسمك بالكامل"></label>
-        <label>رقم الموبايل<input name="phone" type="tel" inputmode="tel" autocomplete="tel" required maxlength="20" placeholder="01xxxxxxxxx"></label>
-        <label>المحافظة<input name="governorate" autocomplete="address-level1" required maxlength="80" placeholder="المحافظة"></label>
-        <label>العنوان بالتفصيل<textarea name="address" autocomplete="street-address" required rows="3" maxlength="500" placeholder="المنطقة، الشارع، رقم العقار، وأقرب علامة مميزة"></textarea></label>
-        <label>ملاحظات إضافية <span>(اختياري)</span><textarea name="notes" rows="2" maxlength="500" placeholder="أي تفاصيل تحب تضيفها"></textarea></label>
-        <p class="checkout-total" id="checkout-total"></p>
-        <p class="checkout-error" id="checkout-error" role="alert"></p>
-        <button class="solid-button" id="submit-order" type="submit">تأكيد الطلب وإرساله</button>
-        <small class="checkout-secure-note">سيتم تسجيل الطلب أولاً، ثم تأكيد نجاحه داخل الموقع.</small>
-      </form>
-    </div>
-  </div>
-
-  <!-- نافذة نجاح الطلب داخل الموقع -->
-  <div class="azazy-success" id="azazy-success" aria-hidden="true">
-    <div class="azazy-success-card" role="dialog" aria-modal="true" aria-labelledby="azazy-success-title">
-
-      <div class="azazy-success-icon">✓</div>
-
-      <div class="azazy-success-brand">AZAZY CLOTHES</div>
-
-      <h2 id="azazy-success-title">تم طلبك بنجاح!</h2>
-
-      <p>
-        شكراً لاختيارك AZAZY CLOTHES ❤️
-        <br>
-        تم استلام طلبك بنجاح، وهنبدأ نجهزه ليك.
-      </p>
-
-      <div class="azazy-order-number">
-        <span>رقم طلبك</span>
-        <strong id="azazy-success-order-number">AZ-000000</strong>
-      </div>
-
-      <button
-        type="button"
-        class="azazy-success-button"
-        onclick="closeOrderSuccess()"
-      >
-        متابعة التسوق
-      </button>
-
-      <small class="azazy-success-note">
-        WEAR YOUR STYLE
-      </small>
-
-    </div>
-  </div>
-
   <footer id="contact" class="azazy-footer">
     <div class="footer-glow"></div>
-
-    <div class="footer-main">
-      <img src="assets/azazy-logo.png" alt="AZAZY CLOTHES">
-
-      <p class="footer-tagline">WEAR YOUR STYLE.</p>
-
-      <span class="footer-line"></span>
-
-      <h3>خلّيك دايمًا على تواصل معانا</h3>
-
-      <p class="footer-description">
-        استفسارك يهمنا، وفريق AZAZY جاهز يساعدك تختار أسلوبك.
-      </p>
-
-      <a
-        class="footer-whatsapp"
-        href="https://wa.me/201142336180"
-        target="_blank"
-        rel="noopener"
-      >
-        <span class="whatsapp-icon">✆</span>
-        تواصل معنا عبر واتساب
-        <span class="footer-arrow">↗</span>
-      </a>
-
-      <span class="footer-note">WE ARE HERE FOR YOU</span>
-    </div>
-
-    <div class="footer-bottom">
-      <span>
-        © <span id="year"></span> AZAZY CLOTHES.
-        ALL RIGHTS RESERVED.
-      </span>
-
-      <a href="#home">العودة للأعلى ↑</a>
-    </div>
+    <div class="footer-main"><img src="assets/azazy-logo.png" alt="AZAZY CLOTHES"><p class="footer-tagline">WEAR YOUR STYLE.</p><span class="footer-line"></span><h3>خلّيك دايمًا على تواصل معانا</h3><p class="footer-description">استفسارك يهمنا، وفريق AZAZY جاهز يساعدك تختار أسلوبك.</p><a class="footer-whatsapp" href="https://wa.me/201142336180" target="_blank" rel="noopener"><span class="whatsapp-icon">✆</span>تواصل معنا عبر واتساب<span class="footer-arrow">↗</span></a><span class="footer-note">WE ARE HERE FOR YOU</span></div>
+    <div class="footer-bottom"><span>© <span id="year"></span> AZAZY CLOTHES. ALL RIGHTS RESERVED.</span><a href="#home">العودة للأعلى ↑</a></div>
   </footer>
-
-  <script>
-    // عرض رسالة نجاح الطلب
-    window.showOrderSuccess = function(orderId) {
-      const modal = document.getElementById("azazy-success");
-      const number = document.getElementById("azazy-success-order-number");
-
-      if (!modal || !number) return;
-
-      number.textContent = String(orderId);
-      modal.classList.add("show");
-      modal.setAttribute("aria-hidden", "false");
-    };
-
-    // إغلاق رسالة نجاح الطلب
-    window.closeOrderSuccess = function() {
-      const modal = document.getElementById("azazy-success");
-
-      if (!modal) return;
-
-      modal.classList.remove("show");
-      modal.setAttribute("aria-hidden", "true");
-    };
-  </script>
-
   <script src="app.js"></script>
-
+  <script>
+    // Hero hanger animation only — does not interact with products or checkout.
+    (() => {
+      const rack = document.querySelector('.hero-hanger');
+      if (!rack) return;
+      const items = [...rack.querySelectorAll('.hanger-item')];
+      let active = 0;
+      const render = () => {
+        items.forEach((item, index) => {
+          const offset = (index - active + items.length) % items.length;
+          item.classList.remove('is-active','is-left-one','is-right-one','is-left-two','is-right-two');
+          const positions = ['is-active','is-right-one','is-right-two','is-left-two','is-left-one'];
+          item.classList.add(positions[offset]);
+          item.setAttribute('aria-hidden', offset === 0 ? 'false' : 'true');
+        });
+        const count = rack.querySelector('.hanger-caption span:last-child');
+        if (count) count.textContent = `0${active + 1} — 05`;
+      };
+      render();
+      window.setInterval(() => { active = (active + 1) % items.length; render(); }, 3200);
+    })();
+  </script>
 </body>
 </html>
