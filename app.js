@@ -392,12 +392,19 @@ $("checkout-form").addEventListener("submit", async e => {
     0
   );
 
+  // رقم طلب مرجعي خاص بالمتجر
+  const orderId =
+    "AZ-" + Date.now().toString().slice(-8) +
+    "-" + Math.floor(100 + Math.random() * 900);
+
   const order = {
     customer_name: customer.name,
     phone: customer.phone,
     governorate: customer.governorate,
     address: customer.address,
-    notes: customer.notes,
+    notes: customer.notes
+      ? customer.notes + "\nرقم الطلب: " + orderId
+      : "رقم الطلب: " + orderId,
     items,
     total,
     status: "pending"
@@ -408,6 +415,9 @@ $("checkout-form").addEventListener("submit", async e => {
   ).join("\n");
 
   const message = `طلب جديد من AZAZY CLOTHES
+
+رقم الطلب: ${orderId}
+
 الاسم: ${customer.name}
 الموبايل: ${customer.phone}
 المحافظة: ${customer.governorate}
@@ -427,8 +437,6 @@ ${orderLines}
   $("checkout-error").textContent = "";
   renderCart();
 
-  let orderRegistered = false;
-
   try {
     const response = await fetch(`${SUPABASE_URL}/rest/v1/orders`, {
       method: "POST",
@@ -445,8 +453,7 @@ ${orderLines}
       throw new Error(await response.text());
     }
 
-    orderRegistered = true;
-
+    // نجاح تسجيل الطلب
     cart = [];
     save();
     renderCart();
@@ -455,17 +462,23 @@ ${orderLines}
     closeCheckout();
     closeCart();
 
+    alert(
+      "تم استلام طلبك بنجاح ❤️\n\n" +
+      "رقم طلبك: " + orderId +
+      "\n\nشكراً لاختيارك AZAZY CLOTHES"
+    );
+
+    // فتح واتساب المتجر برسالة تفاصيل الطلب
     window.location.href =
       `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
 
   } catch (error) {
     console.error("AZAZY order submission:", error);
 
-    $("checkout-error").textContent = orderRegistered
-      ? "تم تسجيل طلبك بنجاح. لا تعيد إرسال الطلب."
-      : "تعذر تأكيد تسجيل الطلب: " +
-        (error.message || "خطأ غير معروف") +
-        ". احتفظ بالسلة وتأكد من الطلب في Supabase قبل إعادة المحاولة.";
+    $("checkout-error").textContent =
+      "تعذر تسجيل الطلب: " +
+      (error.message || "خطأ غير معروف") +
+      ". السلة محفوظة، حاول مرة أخرى بعد التأكد من السبب.";
 
   } finally {
     isSubmitting = false;
