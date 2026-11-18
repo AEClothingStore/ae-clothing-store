@@ -10,145 +10,378 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+
   <style>
-    .hero-mark { position: relative; }
-    .hero-mark .fabric-orbit { display: none !important; }
-    .hero-mark .hero-logo { position:absolute;display:block;width:100%;height:100%;inset:0;object-fit:contain;transform:none;mix-blend-mode:screen;z-index:2;pointer-events:none; }
-    .hero-mark .hero-caption { position:relative;z-index:3; }
-    @media(max-width:760px){.hero-mark .hero-logo{width:100%;height:100%;}}
+    .hero-mark{position:relative}
+    .hero-mark .fabric-orbit{display:none!important}
+    .hero-mark .hero-logo{
+      position:absolute;display:block;width:100%;height:100%;
+      inset:0;object-fit:contain;transform:none;
+      mix-blend-mode:screen;z-index:2;pointer-events:none
+    }
+    .hero-mark .hero-caption{position:relative;z-index:3}
+    @media(max-width:760px){
+      .hero-mark .hero-logo{width:100%;height:100%}
+    }
   </style>
 </head>
+
 <body>
-  <div class="announcement"><span></span>AZAZY CLOTHES — WEAR YOUR STYLE<span></span></div>
+  <div class="announcement">
+    <span></span>
+    AZAZY CLOTHES — WEAR YOUR STYLE
+    <span></span>
+  </div>
+
   <header class="site-header">
-    <a class="brand" href="#home"><img src="assets/azazy-logo.png" alt="AZAZY CLOTHES"></a>
+    <a class="brand" href="#home">
+      <img src="assets/azazy-logo.png" alt="AZAZY CLOTHES">
+    </a>
+
     <button class="menu-toggle" id="menu-toggle">☰</button>
-    <nav id="main-nav"><a href="#home">الرئيسية</a><a href="#collection">المجموعة</a><a href="#story">عن AZAZY</a><a href="#contact">تواصل معنا</a></nav>
-    <button class="bag-button" id="cart-toggle">السلة <b id="cart-count">0</b></button>
+
+    <nav id="main-nav">
+      <a href="#home">الرئيسية</a>
+      <a href="#collection">المجموعة</a>
+      <a href="#story">عن AZAZY</a>
+      <a href="#contact">تواصل معنا</a>
+    </nav>
+
+    <button class="bag-button" id="cart-toggle">
+      السلة <b id="cart-count">0</b>
+    </button>
   </header>
+
   <main>
     <section class="hero" id="home">
+
       <div class="hero-text">
         <p class="eyebrow">MODERN MENSWEAR</p>
-        <h1>BE YOUR<br><em>OWN STANDARD.</em></h1>
-        <p class="hero-copy">أسلوب يعبر عنك. تفاصيل بسيطة، حضور لا يُنسى.</p>
-        <a class="outline-button" href="#collection">اكتشف المجموعة <span>←</span></a>
+
+        <h1>
+          BE YOUR<br>
+          <em>OWN STANDARD.</em>
+        </h1>
+
+        <p class="hero-copy">
+          أسلوب يعبر عنك. تفاصيل بسيطة، حضور لا يُنسى.
+        </p>
+
+        <a class="outline-button" href="#collection">
+          اكتشف المجموعة <span>←</span>
+        </a>
       </div>
 
-      <!-- Interactive AZAZY hoodie hanger -->
-      <div class="hero-hanger" aria-label="تشكيلة هوديز AZAZY المتحركة">
-        <div class="hanger-glow"></div>
-        <div class="hanger-rail"><span></span></div>
-        <div class="hanger-track">
-          <div class="hanger-item hoodie-wine" data-slot="0" aria-hidden="true">
-            <span class="hanger-hook"></span>
-            <svg viewBox="0 0 220 260" role="img" aria-label="هودي برغندي">
-              <path class="hoodie-body" d="M76 48 Q79 17 110 14 Q141 17 144 48 L171 60 Q190 68 198 91 L216 165 L178 178 L165 132 L165 242 Q110 257 55 242 L55 132 L42 178 L4 165 L22 91 Q30 68 49 60 Z"/>
-              <path class="hoodie-hood" d="M76 48 Q79 17 110 14 Q141 17 144 48 L132 66 Q110 50 88 66 Z"/>
-              <path class="hoodie-detail" d="M88 66 Q110 52 132 66 M100 70 L96 94 M120 70 L124 94"/>
-              <path class="hoodie-pocket" d="M78 157 Q110 171 142 157 L136 194 Q110 204 84 194 Z"/>
-              <path class="hoodie-seam" d="M55 132 L55 242 M165 132 L165 242"/>
-              <text x="110" y="225" text-anchor="middle" class="hoodie-brand">AZAZY</text>
-            </svg>
-          </div>
-          <div class="hanger-item hoodie-ivory" data-slot="1" aria-hidden="true">
-            <span class="hanger-hook"></span>
-            <svg viewBox="0 0 220 260" role="img" aria-label="هودي أوف وايت">
-              <path class="hoodie-body" d="M76 48 Q79 17 110 14 Q141 17 144 48 L171 60 Q190 68 198 91 L216 165 L178 178 L165 132 L165 242 Q110 257 55 242 L55 132 L42 178 L4 165 L22 91 Q30 68 49 60 Z"/>
-              <path class="hoodie-hood" d="M76 48 Q79 17 110 14 Q141 17 144 48 L132 66 Q110 50 88 66 Z"/>
-              <path class="hoodie-detail" d="M88 66 Q110 52 132 66 M100 70 L96 94 M120 70 L124 94"/>
-              <path class="hoodie-pocket" d="M78 157 Q110 171 142 157 L136 194 Q110 204 84 194 Z"/>
-              <path class="hoodie-seam" d="M55 132 L55 242 M165 132 L165 242"/>
-              <text x="110" y="225" text-anchor="middle" class="hoodie-brand">AZAZY</text>
-            </svg>
-          </div>
-          <div class="hanger-item hoodie-wine" data-slot="2" aria-hidden="true">
-            <span class="hanger-hook"></span>
-            <svg viewBox="0 0 220 260" role="img" aria-label="هودي برغندي">
-              <path class="hoodie-body" d="M76 48 Q79 17 110 14 Q141 17 144 48 L171 60 Q190 68 198 91 L216 165 L178 178 L165 132 L165 242 Q110 257 55 242 L55 132 L42 178 L4 165 L22 91 Q30 68 49 60 Z"/>
-              <path class="hoodie-hood" d="M76 48 Q79 17 110 14 Q141 17 144 48 L132 66 Q110 50 88 66 Z"/>
-              <path class="hoodie-detail" d="M88 66 Q110 52 132 66 M100 70 L96 94 M120 70 L124 94"/>
-              <path class="hoodie-pocket" d="M78 157 Q110 171 142 157 L136 194 Q110 204 84 194 Z"/>
-              <path class="hoodie-seam" d="M55 132 L55 242 M165 132 L165 242"/>
-              <text x="110" y="225" text-anchor="middle" class="hoodie-brand">AZAZY</text>
-            </svg>
-          </div>
-          <div class="hanger-item hoodie-ivory" data-slot="3" aria-hidden="true">
-            <span class="hanger-hook"></span>
-            <svg viewBox="0 0 220 260" role="img" aria-label="هودي أوف وايت">
-              <path class="hoodie-body" d="M76 48 Q79 17 110 14 Q141 17 144 48 L171 60 Q190 68 198 91 L216 165 L178 178 L165 132 L165 242 Q110 257 55 242 L55 132 L42 178 L4 165 L22 91 Q30 68 49 60 Z"/>
-              <path class="hoodie-hood" d="M76 48 Q79 17 110 14 Q141 17 144 48 L132 66 Q110 50 88 66 Z"/>
-              <path class="hoodie-detail" d="M88 66 Q110 52 132 66 M100 70 L96 94 M120 70 L124 94"/>
-              <path class="hoodie-pocket" d="M78 157 Q110 171 142 157 L136 194 Q110 204 84 194 Z"/>
-              <path class="hoodie-seam" d="M55 132 L55 242 M165 132 L165 242"/>
-              <text x="110" y="225" text-anchor="middle" class="hoodie-brand">AZAZY</text>
-            </svg>
-          </div>
-          <div class="hanger-item hoodie-wine" data-slot="4" aria-hidden="true">
-            <span class="hanger-hook"></span>
-            <svg viewBox="0 0 220 260" role="img" aria-label="هودي برغندي">
-              <path class="hoodie-body" d="M76 48 Q79 17 110 14 Q141 17 144 48 L171 60 Q190 68 198 91 L216 165 L178 178 L165 132 L165 242 Q110 257 55 242 L55 132 L42 178 L4 165 L22 91 Q30 68 49 60 Z"/>
-              <path class="hoodie-hood" d="M76 48 Q79 17 110 14 Q141 17 144 48 L132 66 Q110 50 88 66 Z"/>
-              <path class="hoodie-detail" d="M88 66 Q110 52 132 66 M100 70 L96 94 M120 70 L124 94"/>
-              <path class="hoodie-pocket" d="M78 157 Q110 171 142 157 L136 194 Q110 204 84 194 Z"/>
-              <path class="hoodie-seam" d="M55 132 L55 242 M165 132 L165 242"/>
-              <text x="110" y="225" text-anchor="middle" class="hoodie-brand">AZAZY</text>
-            </svg>
-          </div>
+      <!-- AZAZY PREMIUM HOODIE HANGER -->
+      <div class="azazy-hanger" aria-label="تشكيلة هوديز AZAZY المتحركة">
+        <div class="hanger-stage-glow"></div>
+
+        <div class="hanger-topbar">
+          <span class="hanger-topbar-cap"></span>
+          <span class="hanger-topbar-shine"></span>
         </div>
-        <div class="hanger-caption"><span>THE HOODIE EDIT</span><i></i><span>01 — 05</span></div>
+
+        <div class="hanger-items">
+
+          <div class="hanger-piece hoodie-wine" aria-hidden="true">
+            <span class="hanger-hook"></span>
+            <svg viewBox="0 0 260 300" aria-hidden="true">
+              <ellipse cx="130" cy="275" rx="76" ry="10" fill="#120003" opacity=".28"/>
+              <path class="hoodie-shadow" d="M87 65 Q91 26 130 22 Q169 26 173 65 L208 80 Q224 87 230 110 L253 197 L216 211 L197 158 L196 269 Q130 282 64 269 L63 158 L44 211 L7 197 L30 110 Q36 87 52 80 Z"/>
+              <path class="hoodie-fabric" d="M87 65 Q91 26 130 22 Q169 26 173 65 L208 80 Q224 87 230 110 L253 197 L216 211 L197 158 L196 269 Q130 282 64 269 L63 158 L44 211 L7 197 L30 110 Q36 87 52 80 Z"/>
+              <path class="hoodie-sleeve-shade" d="M52 80 Q36 87 30 110 L7 197 L44 211 L75 126 Z M208 80 Q224 87 230 110 L253 197 L216 211 L185 126 Z"/>
+              <path class="hoodie-hood" d="M87 65 Q91 26 130 22 Q169 26 173 65 L157 88 Q130 70 103 88 Z"/>
+              <path class="hoodie-hood-inner" d="M105 70 Q109 43 130 41 Q151 43 155 70 Q130 61 105 70 Z"/>
+              <path class="hoodie-seam" d="M87 65 Q130 91 173 65 M103 88 Q130 72 157 88 M64 269 Q130 282 196 269 M63 158 L44 211 M197 158 L216 211"/>
+              <path class="hoodie-cord" d="M112 78 L108 111 M148 78 L152 111"/>
+              <circle class="hoodie-eyelet" cx="112" cy="79" r="2.5"/>
+              <circle class="hoodie-eyelet" cx="148" cy="79" r="2.5"/>
+              <path class="hoodie-pocket" d="M91 174 Q130 188 169 174 L162 221 Q130 232 98 221 Z"/>
+              <path class="hoodie-pocket-seam" d="M99 181 Q130 192 161 181"/>
+              <path class="hoodie-cuff" d="M8 194 L44 207 L40 220 L4 207 Z M216 207 L252 194 L256 207 L220 220 Z"/>
+              <path class="hoodie-waist" d="M64 256 Q130 269 196 256 L196 269 Q130 282 64 269 Z"/>
+              <path class="hoodie-logo" d="M117 146 L130 132 L143 146 L130 160 Z"/>
+              <text x="130" y="205" text-anchor="middle" class="hoodie-wordmark">AZAZY</text>
+            </svg>
+          </div>
+
+          <div class="hanger-piece hoodie-ivory" aria-hidden="true">
+            <span class="hanger-hook"></span>
+            <svg viewBox="0 0 260 300" aria-hidden="true">
+              <ellipse cx="130" cy="275" rx="76" ry="10" fill="#120003" opacity=".28"/>
+              <path class="hoodie-shadow" d="M87 65 Q91 26 130 22 Q169 26 173 65 L208 80 Q224 87 230 110 L253 197 L216 211 L197 158 L196 269 Q130 282 64 269 L63 158 L44 211 L7 197 L30 110 Q36 87 52 80 Z"/>
+              <path class="hoodie-fabric" d="M87 65 Q91 26 130 22 Q169 26 173 65 L208 80 Q224 87 230 110 L253 197 L216 211 L197 158 L196 269 Q130 282 64 269 L63 158 L44 211 L7 197 L30 110 Q36 87 52 80 Z"/>
+              <path class="hoodie-sleeve-shade" d="M52 80 Q36 87 30 110 L7 197 L44 211 L75 126 Z M208 80 Q224 87 230 110 L253 197 L216 211 L185 126 Z"/>
+              <path class="hoodie-hood" d="M87 65 Q91 26 130 22 Q169 26 173 65 L157 88 Q130 70 103 88 Z"/>
+              <path class="hoodie-hood-inner" d="M105 70 Q109 43 130 41 Q151 43 155 70 Q130 61 105 70 Z"/>
+              <path class="hoodie-seam" d="M87 65 Q130 91 173 65 M103 88 Q130 72 157 88 M64 269 Q130 282 196 269 M63 158 L44 211 M197 158 L216 211"/>
+              <path class="hoodie-cord" d="M112 78 L108 111 M148 78 L152 111"/>
+              <circle class="hoodie-eyelet" cx="112" cy="79" r="2.5"/>
+              <circle class="hoodie-eyelet" cx="148" cy="79" r="2.5"/>
+              <path class="hoodie-pocket" d="M91 174 Q130 188 169 174 L162 221 Q130 232 98 221 Z"/>
+              <path class="hoodie-pocket-seam" d="M99 181 Q130 192 161 181"/>
+              <path class="hoodie-cuff" d="M8 194 L44 207 L40 220 L4 207 Z M216 207 L252 194 L256 207 L220 220 Z"/>
+              <path class="hoodie-waist" d="M64 256 Q130 269 196 256 L196 269 Q130 282 64 269 Z"/>
+              <path class="hoodie-logo" d="M117 146 L130 132 L143 146 L130 160 Z"/>
+              <text x="130" y="205" text-anchor="middle" class="hoodie-wordmark">AZAZY</text>
+            </svg>
+          </div>
+
+          <div class="hanger-piece hoodie-wine" aria-hidden="true">
+            <span class="hanger-hook"></span>
+            <svg viewBox="0 0 260 300" aria-hidden="true">
+              <ellipse cx="130" cy="275" rx="76" ry="10" fill="#120003" opacity=".28"/>
+              <path class="hoodie-shadow" d="M87 65 Q91 26 130 22 Q169 26 173 65 L208 80 Q224 87 230 110 L253 197 L216 211 L197 158 L196 269 Q130 282 64 269 L63 158 L44 211 L7 197 L30 110 Q36 87 52 80 Z"/>
+              <path class="hoodie-fabric" d="M87 65 Q91 26 130 22 Q169 26 173 65 L208 80 Q224 87 230 110 L253 197 L216 211 L197 158 L196 269 Q130 282 64 269 L63 158 L44 211 L7 197 L30 110 Q36 87 52 80 Z"/>
+              <path class="hoodie-sleeve-shade" d="M52 80 Q36 87 30 110 L7 197 L44 211 L75 126 Z M208 80 Q224 87 230 110 L253 197 L216 211 L185 126 Z"/>
+              <path class="hoodie-hood" d="M87 65 Q91 26 130 22 Q169 26 173 65 L157 88 Q130 70 103 88 Z"/>
+              <path class="hoodie-hood-inner" d="M105 70 Q109 43 130 41 Q151 43 155 70 Q130 61 105 70 Z"/>
+              <path class="hoodie-seam" d="M87 65 Q130 91 173 65 M103 88 Q130 72 157 88 M64 269 Q130 282 196 269 M63 158 L44 211 M197 158 L216 211"/>
+              <path class="hoodie-cord" d="M112 78 L108 111 M148 78 L152 111"/>
+              <circle class="hoodie-eyelet" cx="112" cy="79" r="2.5"/>
+              <circle class="hoodie-eyelet" cx="148" cy="79" r="2.5"/>
+              <path class="hoodie-pocket" d="M91 174 Q130 188 169 174 L162 221 Q130 232 98 221 Z"/>
+              <path class="hoodie-pocket-seam" d="M99 181 Q130 192 161 181"/>
+              <path class="hoodie-cuff" d="M8 194 L44 207 L40 220 L4 207 Z M216 207 L252 194 L256 207 L220 220 Z"/>
+              <path class="hoodie-waist" d="M64 256 Q130 269 196 256 L196 269 Q130 282 64 269 Z"/>
+              <path class="hoodie-logo" d="M117 146 L130 132 L143 146 L130 160 Z"/>
+              <text x="130" y="205" text-anchor="middle" class="hoodie-wordmark">AZAZY</text>
+            </svg>
+          </div>
+
+          <div class="hanger-piece hoodie-ivory" aria-hidden="true">
+            <span class="hanger-hook"></span>
+            <svg viewBox="0 0 260 300" aria-hidden="true">
+              <ellipse cx="130" cy="275" rx="76" ry="10" fill="#120003" opacity=".28"/>
+              <path class="hoodie-shadow" d="M87 65 Q91 26 130 22 Q169 26 173 65 L208 80 Q224 87 230 110 L253 197 L216 211 L197 158 L196 269 Q130 282 64 269 L63 158 L44 211 L7 197 L30 110 Q36 87 52 80 Z"/>
+              <path class="hoodie-fabric" d="M87 65 Q91 26 130 22 Q169 26 173 65 L208 80 Q224 87 230 110 L253 197 L216 211 L197 158 L196 269 Q130 282 64 269 L63 158 L44 211 L7 197 L30 110 Q36 87 52 80 Z"/>
+              <path class="hoodie-sleeve-shade" d="M52 80 Q36 87 30 110 L7 197 L44 211 L75 126 Z M208 80 Q224 87 230 110 L253 197 L216 211 L185 126 Z"/>
+              <path class="hoodie-hood" d="M87 65 Q91 26 130 22 Q169 26 173 65 L157 88 Q130 70 103 88 Z"/>
+              <path class="hoodie-hood-inner" d="M105 70 Q109 43 130 41 Q151 43 155 70 Q130 61 105 70 Z"/>
+              <path class="hoodie-seam" d="M87 65 Q130 91 173 65 M103 88 Q130 72 157 88 M64 269 Q130 282 196 269 M63 158 L44 211 M197 158 L216 211"/>
+              <path class="hoodie-cord" d="M112 78 L108 111 M148 78 L152 111"/>
+              <circle class="hoodie-eyelet" cx="112" cy="79" r="2.5"/>
+              <circle class="hoodie-eyelet" cx="148" cy="79" r="2.5"/>
+              <path class="hoodie-pocket" d="M91 174 Q130 188 169 174 L162 221 Q130 232 98 221 Z"/>
+              <path class="hoodie-pocket-seam" d="M99 181 Q130 192 161 181"/>
+              <path class="hoodie-cuff" d="M8 194 L44 207 L40 220 L4 207 Z M216 207 L252 194 L256 207 L220 220 Z"/>
+              <path class="hoodie-waist" d="M64 256 Q130 269 196 256 L196 269 Q130 282 64 269 Z"/>
+              <path class="hoodie-logo" d="M117 146 L130 132 L143 146 L130 160 Z"/>
+              <text x="130" y="205" text-anchor="middle" class="hoodie-wordmark">AZAZY</text>
+            </svg>
+          </div>
+
+          <div class="hanger-piece hoodie-wine" aria-hidden="true">
+            <span class="hanger-hook"></span>
+            <svg viewBox="0 0 260 300" aria-hidden="true">
+              <ellipse cx="130" cy="275" rx="76" ry="10" fill="#120003" opacity=".28"/>
+              <path class="hoodie-shadow" d="M87 65 Q91 26 130 22 Q169 26 173 65 L208 80 Q224 87 230 110 L253 197 L216 211 L197 158 L196 269 Q130 282 64 269 L63 158 L44 211 L7 197 L30 110 Q36 87 52 80 Z"/>
+              <path class="hoodie-fabric" d="M87 65 Q91 26 130 22 Q169 26 173 65 L208 80 Q224 87 230 110 L253 197 L216 211 L197 158 L196 269 Q130 282 64 269 L63 158 L44 211 L7 197 L30 110 Q36 87 52 80 Z"/>
+              <path class="hoodie-sleeve-shade" d="M52 80 Q36 87 30 110 L7 197 L44 211 L75 126 Z M208 80 Q224 87 230 110 L253 197 L216 211 L185 126 Z"/>
+              <path class="hoodie-hood" d="M87 65 Q91 26 130 22 Q169 26 173 65 L157 88 Q130 70 103 88 Z"/>
+              <path class="hoodie-hood-inner" d="M105 70 Q109 43 130 41 Q151 43 155 70 Q130 61 105 70 Z"/>
+              <path class="hoodie-seam" d="M87 65 Q130 91 173 65 M103 88 Q130 72 157 88 M64 269 Q130 282 196 269 M63 158 L44 211 M197 158 L216 211"/>
+              <path class="hoodie-cord" d="M112 78 L108 111 M148 78 L152 111"/>
+              <circle class="hoodie-eyelet" cx="112" cy="79" r="2.5"/>
+              <circle class="hoodie-eyelet" cx="148" cy="79" r="2.5"/>
+              <path class="hoodie-pocket" d="M91 174 Q130 188 169 174 L162 221 Q130 232 98 221 Z"/>
+              <path class="hoodie-pocket-seam" d="M99 181 Q130 192 161 181"/>
+              <path class="hoodie-cuff" d="M8 194 L44 207 L40 220 L4 207 Z M216 207 L252 194 L256 207 L220 220 Z"/>
+              <path class="hoodie-waist" d="M64 256 Q130 269 196 256 L196 269 Q130 282 64 269 Z"/>
+              <path class="hoodie-logo" d="M117 146 L130 132 L143 146 L130 160 Z"/>
+              <text x="130" y="205" text-anchor="middle" class="hoodie-wordmark">AZAZY</text>
+            </svg>
+          </div>
+
+        </div>
+
+        <div class="hanger-signature">
+          <span>THE HOODIE COLLECTION</span>
+          <i></i>
+          <b>AZAZY</b>
+        </div>
       </div>
 
       <div class="hero-mark">
         <img class="hero-logo" src="assets/azazy-logo.png" alt="AZAZY CLOTHES">
         <div class="hero-caption">WEAR YOUR STYLE — AZAZY CLOTHES</div>
       </div>
-      <div class="hero-bottom"><span>01 / THE NEW IDENTITY</span><span>CAIRO · EGYPT</span></div>
+
+      <div class="hero-bottom">
+        <span>01 / THE NEW IDENTITY</span>
+        <span>CAIRO · EGYPT</span>
+      </div>
     </section>
 
     <section class="promise">
-      <div><span class="promise-icon">✳</span><strong>DESIGNED WITH INTENT</strong><small>تفاصيل مدروسة</small></div>
-      <div><span class="promise-icon">◇</span><strong>EVERYDAY ELEGANCE</strong><small>أناقة لكل يوم</small></div>
-      <div><span class="promise-icon">↗</span><strong>YOUR STYLE, YOUR RULES</strong><small>أسلوبك له بصمته</small></div>
+      <div>
+        <span class="promise-icon">✳</span>
+        <strong>DESIGNED WITH INTENT</strong>
+        <small>تفاصيل مدروسة</small>
+      </div>
+      <div>
+        <span class="promise-icon">◇</span>
+        <strong>EVERYDAY ELEGANCE</strong>
+        <small>أناقة لكل يوم</small>
+      </div>
+      <div>
+        <span class="promise-icon">↗</span>
+        <strong>YOUR STYLE, YOUR RULES</strong>
+        <small>أسلوبك له بصمته</small>
+      </div>
     </section>
+
     <section class="collection section" id="collection">
-      <div class="section-heading"><div><p class="eyebrow">THE AZAZY EDIT</p><h2>OUR COLLECTION</h2></div><p>اختار القطعة اللي تشبهك.</p></div>
-      <div class="filters"><input id="search" type="search" placeholder="ابحث عن منتج..."><select id="category"><option value="all">كل المنتجات</option><option value="tshirt">تيشيرتات</option><option value="long">كم طويل</option><option value="hoodie">هوديز</option></select></div>
-      <div id="products" class="products-grid"><div class="empty-state"><span>AZAZY</span><h3>قريباً — المجموعة الأولى</h3><p>نعمل على تجهيز اختياراتنا بعناية.</p></div></div>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">THE AZAZY EDIT</p>
+          <h2>OUR COLLECTION</h2>
+        </div>
+        <p>اختار القطعة اللي تشبهك.</p>
+      </div>
+
+      <div class="filters">
+        <input id="search" type="search" placeholder="ابحث عن منتج...">
+        <select id="category">
+          <option value="all">كل المنتجات</option>
+          <option value="tshirt">تيشيرتات</option>
+          <option value="long">كم طويل</option>
+          <option value="hoodie">هوديز</option>
+        </select>
+      </div>
+
+      <div id="products" class="products-grid">
+        <div class="empty-state">
+          <span>AZAZY</span>
+          <h3>قريباً — المجموعة الأولى</h3>
+          <p>نعمل على تجهيز اختياراتنا بعناية.</p>
+        </div>
+      </div>
     </section>
+
     <section class="brand-story" id="story">
-      <div class="story-image"><img src="assets/azazy-logo.png" alt="AZAZY CLOTHES"></div>
-      <div class="story-copy"><p class="eyebrow">A NAME. A STATEMENT.</p><h2>MORE THAN<br><em>JUST CLOTHES.</em></h2><p>AZAZY CLOTHES هي رؤية للأناقة الرجالية العصرية؛ قطع مختارة بعناية لتمنحك حرية التعبير عن أسلوبك بثقة.</p><a href="#collection" class="text-link">اكتشف AZAZY ←</a></div>
+      <div class="story-image">
+        <img src="assets/azazy-logo.png" alt="AZAZY CLOTHES">
+      </div>
+
+      <div class="story-copy">
+        <p class="eyebrow">A NAME. A STATEMENT.</p>
+        <h2>MORE THAN<br><em>JUST CLOTHES.</em></h2>
+        <p>
+          AZAZY CLOTHES هي رؤية للأناقة الرجالية العصرية؛
+          قطع مختارة بعناية لتمنحك حرية التعبير عن أسلوبك بثقة.
+        </p>
+        <a href="#collection" class="text-link">اكتشف AZAZY ←</a>
+      </div>
     </section>
   </main>
-  <aside class="cart-panel" id="cart"><button class="close-cart" id="cart-close">×</button><p class="eyebrow">YOUR SELECTION</p><h2>سلة المشتريات</h2><div id="cart-items">السلة فارغة حالياً.</div><p id="cart-total" class="cart-total"></p><button id="checkout" class="solid-button">اطلب عبر واتساب</button></aside>
+
+  <aside class="cart-panel" id="cart">
+    <button class="close-cart" id="cart-close">×</button>
+    <p class="eyebrow">YOUR SELECTION</p>
+    <h2>سلة المشتريات</h2>
+    <div id="cart-items">السلة فارغة حالياً.</div>
+    <p id="cart-total" class="cart-total"></p>
+    <button id="checkout" class="solid-button">إتمام الطلب</button>
+  </aside>
+
   <div class="cart-overlay" id="cart-overlay"></div>
+
+  <div class="checkout-modal" id="checkout-modal" aria-hidden="true">
+    <div class="checkout-card" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
+      <button type="button" class="checkout-close" id="checkout-close" aria-label="إغلاق">×</button>
+      <p class="eyebrow">AZAZY ORDER</p>
+      <h2 id="checkout-title">بيانات توصيل الطلب</h2>
+      <p class="checkout-intro">اكتب بياناتك بشكل صحيح، وهنسجل طلبك ونجهز رسالة واتساب بتفاصيله.</p>
+
+      <form id="checkout-form">
+        <label>الاسم بالكامل
+          <input name="customer_name" autocomplete="name" required maxlength="100" placeholder="اسمك بالكامل">
+        </label>
+
+        <label>رقم الموبايل
+          <input name="phone" type="tel" inputmode="tel" autocomplete="tel" required maxlength="20" placeholder="01xxxxxxxxx">
+        </label>
+
+        <label>المحافظة
+          <input name="governorate" autocomplete="address-level1" required maxlength="80" placeholder="المحافظة">
+        </label>
+
+        <label>العنوان بالتفصيل
+          <textarea name="address" autocomplete="street-address" required rows="3" maxlength="500" placeholder="المنطقة، الشارع، رقم العقار، وأقرب علامة مميزة"></textarea>
+        </label>
+
+        <label>ملاحظات إضافية <span>(اختياري)</span>
+          <textarea name="notes" rows="2" maxlength="500" placeholder="أي تفاصيل تحب تضيفها"></textarea>
+        </label>
+
+        <p class="checkout-total" id="checkout-total"></p>
+        <p class="checkout-error" id="checkout-error" role="alert"></p>
+        <button class="solid-button" id="submit-order" type="submit">تأكيد الطلب وإرساله</button>
+        <small class="checkout-secure-note">سيتم تسجيل الطلب أولاً، ثم فتح واتساب لإرسال التفاصيل.</small>
+      </form>
+    </div>
+  </div>
+
   <footer id="contact" class="azazy-footer">
     <div class="footer-glow"></div>
-    <div class="footer-main"><img src="assets/azazy-logo.png" alt="AZAZY CLOTHES"><p class="footer-tagline">WEAR YOUR STYLE.</p><span class="footer-line"></span><h3>خلّيك دايمًا على تواصل معانا</h3><p class="footer-description">استفسارك يهمنا، وفريق AZAZY جاهز يساعدك تختار أسلوبك.</p><a class="footer-whatsapp" href="https://wa.me/201142336180" target="_blank" rel="noopener"><span class="whatsapp-icon">✆</span>تواصل معنا عبر واتساب<span class="footer-arrow">↗</span></a><span class="footer-note">WE ARE HERE FOR YOU</span></div>
-    <div class="footer-bottom"><span>© <span id="year"></span> AZAZY CLOTHES. ALL RIGHTS RESERVED.</span><a href="#home">العودة للأعلى ↑</a></div>
+
+    <div class="footer-main">
+      <img src="assets/azazy-logo.png" alt="AZAZY CLOTHES">
+      <p class="footer-tagline">WEAR YOUR STYLE.</p>
+      <span class="footer-line"></span>
+      <h3>خلّيك دايمًا على تواصل معانا</h3>
+      <p class="footer-description">
+        استفسارك يهمنا، وفريق AZAZY جاهز يساعدك تختار أسلوبك.
+      </p>
+
+      <a class="footer-whatsapp" href="https://wa.me/201142336180" target="_blank" rel="noopener">
+        <span class="whatsapp-icon">✆</span>
+        تواصل معنا عبر واتساب
+        <span class="footer-arrow">↗</span>
+      </a>
+
+      <span class="footer-note">WE ARE HERE FOR YOU</span>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> AZAZY CLOTHES. ALL RIGHTS RESERVED.</span>
+      <a href="#home">العودة للأعلى ↑</a>
+    </div>
   </footer>
+
   <script src="app.js"></script>
+
   <script>
-    // Hero hanger animation only — does not interact with products or checkout.
     (() => {
-      const rack = document.querySelector('.hero-hanger');
-      if (!rack) return;
-      const items = [...rack.querySelectorAll('.hanger-item')];
-      let active = 0;
-      const render = () => {
-        items.forEach((item, index) => {
-          const offset = (index - active + items.length) % items.length;
-          item.classList.remove('is-active','is-left-one','is-right-one','is-left-two','is-right-two');
-          const positions = ['is-active','is-right-one','is-right-two','is-left-two','is-left-one'];
-          item.classList.add(positions[offset]);
-          item.setAttribute('aria-hidden', offset === 0 ? 'false' : 'true');
+      const stage = document.querySelector('.azazy-hanger');
+      if (!stage) return;
+
+      const pieces = [...stage.querySelectorAll('.hanger-piece')];
+      const classes = [
+        'hanger-front',
+        'hanger-right',
+        'hanger-far-right',
+        'hanger-far-left',
+        'hanger-left'
+      ];
+
+      let current = 0;
+
+      function paint() {
+        pieces.forEach((piece, index) => {
+          const position = (index - current + pieces.length) % pieces.length;
+          piece.classList.remove(...classes);
+          piece.classList.add(classes[position]);
+          piece.setAttribute('aria-hidden', position === 0 ? 'false' : 'true');
         });
-        const count = rack.querySelector('.hanger-caption span:last-child');
-        if (count) count.textContent = `0${active + 1} — 05`;
-      };
-      render();
-      window.setInterval(() => { active = (active + 1) % items.length; render(); }, 3200);
+      }
+
+      paint();
+      window.setInterval(() => {
+        current = (current + 1) % pieces.length;
+        paint();
+      }, 3600);
     })();
   </script>
 </body>
