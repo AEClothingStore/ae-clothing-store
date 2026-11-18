@@ -319,3 +319,114 @@ nav a:hover{color:#fff}
 .checkout-secure-note{color:var(--muted);font-size:10px;text-align:center;line-height:1.8}
 #submit-order:disabled{opacity:.65;cursor:wait}
 @media(max-width:520px){.checkout-card{padding:28px 19px}.checkout-card h2{font-size:30px}.checkout-modal{padding:10px}}
+
+/* AZAZY — Product options and cart controls */
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.product-card h3,
+.product-card p {
+  margin: 3px 0;
+}
+
+.product-option {
+  display: grid;
+  gap: 7px;
+  color: var(--ivory);
+  font-size: 12px;
+}
+
+.product-option select {
+  width: 100%;
+  padding: 11px;
+  color: var(--ivory);
+  background: #300006;
+  border: 1px solid var(--line);
+  outline: none;
+  cursor: pointer;
+}
+
+.product-option select:focus {
+  border-color: #c8a46a;
+}
+
+.add-product-button {
+  margin-top: auto;
+  transition: .2s;
+}
+
+.add-product-button:hover {
+  background: var(--ivory);
+  color: var(--wine);
+}
+
+.cart-item {
+  padding: 15px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.cart-item-info p {
+  margin: 5px 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.cart-item-info strong {
+  color: var(--ivory);
+}
+
+.cart-item-controls {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.cart-item-controls button {
+  min-width: 32px;
+  min-height: 32px;
+  padding: 5px 10px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ivory);
+  cursor: pointer;
+}
+
+.cart-item-controls button:hover {
+  background: var(--ivory);
+  color: var(--wine);
+}
+
+.cart-item-controls .remove-cart-item {
+  border-color: #a34a50;
+  color: #ffb5ad;
+}
+
+.cart-item-controls span {
+  min-width: 20px;
+  text-align: center;
+}
+
+.cart-item-controls button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+@media(max-width:760px) {
+  .product-card {
+    padding: 9px;
+  }
+
+  .product-option select {
+    font-size: 12px;
+  }
+
+  .cart-panel {
+    padding: 25px 20px;
+  }
+}
