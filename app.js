@@ -410,25 +410,6 @@ $("checkout-form").addEventListener("submit", async e => {
     status: "pending"
   };
 
-  const orderLines = items.map(item =>
-    `- ${item.name} | اللون: ${item.color || "غير محدد"} | المقاس: ${item.size || "غير محدد"} | العدد: ${item.quantity} | السعر: ${money(item.price * item.quantity)}`
-  ).join("\n");
-
-  const message = `طلب جديد من AZAZY CLOTHES
-
-رقم الطلب: ${orderId}
-
-الاسم: ${customer.name}
-الموبايل: ${customer.phone}
-المحافظة: ${customer.governorate}
-العنوان: ${customer.address}
-ملاحظات: ${customer.notes || "لا يوجد"}
-
-المنتجات:
-${orderLines}
-
-الإجمالي: ${money(total)}`;
-
   const button = $("submit-order");
 
   isSubmitting = true;
@@ -462,15 +443,13 @@ ${orderLines}
     closeCheckout();
     closeCart();
 
-    alert(
-      "تم استلام طلبك بنجاح ❤️\n\n" +
-      "رقم طلبك: " + orderId +
-      "\n\nشكراً لاختيارك AZAZY CLOTHES"
-    );
-
-    // فتح واتساب المتجر برسالة تفاصيل الطلب
-    window.location.href =
-      `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
+    // عرض رسالة النجاح داخل الموقع
+    if (typeof window.showOrderSuccess === "function") {
+      window.showOrderSuccess(orderId);
+    } else {
+      $("checkout-error").textContent =
+        "تم تسجيل الطلب بنجاح. رقم الطلب: " + orderId;
+    }
 
   } catch (error) {
     console.error("AZAZY order submission:", error);
