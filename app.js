@@ -3,9 +3,8 @@
 const WHATSAPP = "201142336180";
 
 // ضع بيانات مشروع Supabase هنا بعد إنشائه (التعليمات في AZAZY-SETUP.txt).
-const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
-const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
-
+const SUPABASE_URL = "https://xrwimmluzcnqwesrnneq.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_85R3ZtthylCEA_MYU5oYcw_bjUh-LGy";
 const products = JSON.parse(localStorage.getItem("azazy_products") || "[]");
 let cart = JSON.parse(localStorage.getItem("azazy_cart") || "[]");
 const $ = (id) => document.getElementById(id);
