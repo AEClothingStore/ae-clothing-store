@@ -1,16 +1,16 @@
 
-// AZAZY CLOTHES — checkout + order registration + cart controls
+// AZAZY CLOTHES — Shared Products + Cart + Checkout
 
 const WHATSAPP = "201142336180";
 
 const SUPABASE_URL = "https://xrwimmluzcnqwesrnneq.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_85R3ZtthylCEA_MYU5oYcw_bjUh-LGy";
 
-const products = JSON.parse(localStorage.getItem("azazy_products") || "[]");
+let products = [];
 let cart = JSON.parse(localStorage.getItem("azazy_cart") || "[]");
 
-const $ = (id) => document.getElementById(id);
-const money = (n) => `${Number(n).toLocaleString("en-US")} ج.م`;
+const $ = id => document.getElementById(id);
+const money = n => `${Number(n).toLocaleString("en-US")} ج.م`;
 
 let isSubmitting = false;
 
@@ -25,14 +25,55 @@ function escapeHTML(value) {
 }
 
 function save() {
-  localStorage.setItem("azazy_products", JSON.stringify(products));
   localStorage.setItem("azazy_cart", JSON.stringify(cart));
 }
 
 function getCartTotal() {
-  return cart.reduce((n, x) => n + Number(x.price) * Number(x.qty), 0);
+  return cart.reduce(
+    (total, item) => total + Number(item.price) * Number(item.qty),
+    0
+  );
 }
 
+// تحميل المنتجات من Supabase
+async function loadProducts() {
+  $("products").innerHTML = `
+    <div class="empty-state">
+      <span>AZAZY</span>
+      <h3>جاري تحميل المجموعة...</h3>
+    </div>`;
+
+  try {
+    const response = await fetch(
+      `${SUPABASE_URL}/rest/v1/products?select=id,name,category,description,price,image,sizes,colors&active=eq.true&order=created_at.desc`,
+      {
+        headers: {
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`
+        }
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(await response.text());
+    }
+
+    products = await response.json();
+    renderProducts();
+
+  } catch (error) {
+    console.error("Products loading error:", error);
+
+    $("products").innerHTML = `
+      <div class="empty-state">
+        <span>AZAZY</span>
+        <h3>تعذر تحميل المنتجات</h3>
+        <p>راجع إعدادات جدول المنتجات في Supabase.</p>
+      </div>`;
+  }
+}
+
+// عرض المنتجات
 function renderProducts() {
   const term = ($("search")?.value || "").trim().toLowerCase();
   const cat = $("category")?.value || "all";
@@ -43,55 +84,151 @@ function renderProducts() {
   );
 
   $("products").innerHTML = shown.length
-    ? shown.map(p => `
-      <article class="product-card">
-        ${p.image ? `<img src="${escapeHTML(p.image)}" alt="${escapeHTML(p.name)}">` : ""}
-        <h3>${escapeHTML(p.name)}</h3>
-        <p>${escapeHTML(p.description || "")}</p>
-        <p class="price">${money(p.price)}</p>
-        <p>المقاسات: ${(p.sizes || []).map(escapeHTML).join("، ")}</p>
-        <button type="button" data-add="${escapeHTML(p.id)}">أضف للسلة</button>
-      </article>
-    `).join("")
-    : `<div class="empty-state">
+    ? shown.map(p => {
+        const sizes = Array.isArray(p.sizes) ? p.sizes : [];
+        const colors = Array.isArray(p.colors) ? p.colors : [];
+
+        return `
+          <article class="product-card"
+            data-product-card="${escapeHTML(p.id)}">
+
+            ${p.image ? `
+              <img
+                src="${escapeHTML(p.image)}"
+                alt="${escapeHTML(p.name)}"
+                onerror="this.style.display='none'"
+              >
+            ` : ""}
+
+            <h3>${escapeHTML(p.name)}</h3>
+            <p>${escapeHTML(p.description || "")}</p>
+            <p class="price">${money(p.price)}</p>
+
+            ${colors.length ? `
+              <label class="product-option">
+                <span>اختار اللون</span>
+                <select data-color-select>
+                  ${colors.map(color => `
+                    <option value="${escapeHTML(color)}">
+                      ${escapeHTML(color)}
+                    </option>
+                  `).join("")}
+                </select>
+              </label>
+            ` : ""}
+
+            ${sizes.length ? `
+              <label class="product-option">
+                <span>اختار المقاس</span>
+                <select data-size-select>
+                  ${sizes.map(size => `
+                    <option value="${escapeHTML(size)}">
+                      ${escapeHTML(size)}
+                    </option>
+                  `).join("")}
+                </select>
+              </label>
+            ` : ""}
+
+            <button type="button"
+              data-add="${escapeHTML(p.id)}"
+              class="add-product-button">
+              أضف للسلة
+            </button>
+
+          </article>
+        `;
+      }).join("")
+    : `
+      <div class="empty-state">
         <span>AZAZY</span>
-        <h3>${products.length ? "لا توجد نتائج" : "قريباً — المجموعة الأولى"}</h3>
-        <p>${products.length ? "جرّب البحث بكلمات أخرى." : "سيتم عرض المنتجات هنا بعد إضافة صورها وأسمائها وأسعارها المعتمدة."}</p>
+        <h3>${products.length ? "لا توجد نتائج" : "لا توجد منتجات حاليًا"}</h3>
+        <p>سيتم عرض المنتجات هنا عند إضافتها للمتجر.</p>
       </div>`;
 }
 
+// إضافة للسلة
+function addToCart(id, card) {
+  if (isSubmitting) return;
+
+  const product = products.find(p => String(p.id) === String(id));
+  if (!product) return;
+
+  const selectedColor =
+    card.querySelector("[data-color-select]")?.value || "";
+
+  const selectedSize =
+    card.querySelector("[data-size-select]")?.value || "";
+
+  const found = cart.find(item =>
+    String(item.id) === String(id) &&
+    String(item.selectedColor || "") === selectedColor &&
+    String(item.selectedSize || "") === selectedSize
+  );
+
+  if (found) {
+    found.qty = Number(found.qty) + 1;
+  } else {
+    cart.push({
+      ...product,
+      selectedColor,
+      selectedSize,
+      qty: 1
+    });
+  }
+
+  save();
+  renderCart();
+
+  const button = card.querySelector("[data-add]");
+  if (button) {
+    button.textContent = "تمت الإضافة للسلة";
+    setTimeout(() => {
+      button.textContent = "أضف للسلة";
+    }, 1200);
+  }
+}
+
+// عرض السلة
 function renderCart() {
   $("cart-count").textContent = cart.reduce(
-    (n, x) => n + Number(x.qty), 0
+    (n, item) => n + Number(item.qty),
+    0
   );
 
   $("cart-items").innerHTML = cart.length
-    ? cart.map(x => `
+    ? cart.map((item, index) => `
       <div class="cart-item">
-        <p>
-          <strong>${escapeHTML(x.name)}</strong>
-          <br>
-          ${money(x.price)} × ${Number(x.qty)}
-          <br>
-          الإجمالي: ${money(Number(x.price) * Number(x.qty))}
-        </p>
+        <div class="cart-item-info">
+          <strong>${escapeHTML(item.name)}</strong>
+
+          <p>اللون: ${escapeHTML(item.selectedColor || "غير محدد")}</p>
+          <p>المقاس: ${escapeHTML(item.selectedSize || "غير محدد")}</p>
+
+          <p>${money(item.price)} × ${Number(item.qty)}</p>
+
+          <strong>
+            ${money(Number(item.price) * Number(item.qty))}
+          </strong>
+        </div>
 
         <div class="cart-item-controls">
           <button type="button"
             data-cart-action="increase"
-            data-cart-id="${escapeHTML(x.id)}"
+            data-cart-index="${index}"
             ${isSubmitting ? "disabled" : ""}>+</button>
 
-          <span>${Number(x.qty)}</span>
+          <span>${Number(item.qty)}</span>
 
           <button type="button"
             data-cart-action="decrease"
-            data-cart-id="${escapeHTML(x.id)}"
+            data-cart-index="${index}"
             ${isSubmitting ? "disabled" : ""}>−</button>
 
           <button type="button"
+            class="remove-cart-item"
             data-cart-action="remove"
-            data-cart-id="${escapeHTML(x.id)}"
+            data-cart-index="${index}"
             ${isSubmitting ? "disabled" : ""}>حذف</button>
         </div>
       </div>
@@ -109,29 +246,12 @@ function renderCart() {
   }
 }
 
-function addToCart(id) {
+// التحكم في الكميات والحذف
+function updateCartItem(index, action) {
   if (isSubmitting) return;
 
-  const p = products.find(x => String(x.id) === String(id));
-  if (!p) return;
-
-  const found = cart.find(x => String(x.id) === String(id));
-
-  if (found) {
-    found.qty = Number(found.qty) + 1;
-  } else {
-    cart.push({ ...p, qty: 1 });
-  }
-
-  save();
-  renderCart();
-}
-
-function updateCartItem(id, action) {
-  if (isSubmitting) return;
-
-  const index = cart.findIndex(x => String(x.id) === String(id));
-  if (index === -1) return;
+  index = Number(index);
+  if (!Number.isInteger(index) || !cart[index]) return;
 
   if (action === "increase") {
     cart[index].qty = Number(cart[index].qty) + 1;
@@ -153,21 +273,30 @@ function updateCartItem(id, action) {
   renderCart();
 }
 
+// أحداث المنتجات
 $("products").addEventListener("click", e => {
-  const btn = e.target.closest("[data-add]");
-  if (btn) addToCart(btn.dataset.add);
+  const button = e.target.closest("[data-add]");
+  if (!button) return;
+
+  const card = button.closest("[data-product-card]");
+  if (card) addToCart(button.dataset.add, card);
 });
 
+// أحداث السلة
 $("cart-items").addEventListener("click", e => {
-  const btn = e.target.closest("[data-cart-action]");
-  if (!btn) return;
+  const button = e.target.closest("[data-cart-action]");
+  if (!button) return;
 
-  updateCartItem(btn.dataset.cartId, btn.dataset.cartAction);
+  updateCartItem(
+    button.dataset.cartIndex,
+    button.dataset.cartAction
+  );
 });
 
 $("search").addEventListener("input", renderProducts);
 $("category").addEventListener("change", renderProducts);
 
+// فتح وإغلاق السلة
 function openCart() {
   $("cart").classList.add("open");
   $("cart-overlay").classList.add("show");
@@ -182,6 +311,7 @@ $("cart-toggle").addEventListener("click", openCart);
 $("cart-close").addEventListener("click", closeCart);
 $("cart-overlay").addEventListener("click", closeCart);
 
+// إتمام الطلب
 function openCheckout() {
   if (!cart.length) {
     alert("السلة فارغة");
@@ -210,21 +340,19 @@ $("checkout-modal").addEventListener("click", e => {
 
 function supabaseReady() {
   return SUPABASE_URL.startsWith("https://") &&
-    !SUPABASE_URL.includes("YOUR_") &&
-    SUPABASE_ANON_KEY.length > 20 &&
-    !SUPABASE_ANON_KEY.includes("YOUR_");
+    SUPABASE_ANON_KEY.length > 20;
 }
 
+// تسجيل الطلب في Supabase
 $("checkout-form").addEventListener("submit", async e => {
   e.preventDefault();
 
-  // الاحتفاظ بمرجع النموذج قبل await لحل مشكلة reset
   const checkoutForm = e.currentTarget;
 
   if (isSubmitting) return;
 
   if (!cart.length) {
-    $("checkout-error").textContent = "السلة فارغة. أضف منتجاً أولاً.";
+    $("checkout-error").textContent = "السلة فارغة.";
     return;
   }
 
@@ -250,18 +378,18 @@ $("checkout-form").addEventListener("submit", async e => {
     return;
   }
 
-  // أخذ نسخة ثابتة من المنتجات وقت تأكيد الطلب
-  const items = cart.map(x => ({
-    product_id: String(x.id),
-    name: String(x.name),
-    price: Number(x.price),
-    quantity: Number(x.qty),
-    size: x.selectedSize || null,
-    color: x.selectedColor || null
+  const items = cart.map(item => ({
+    product_id: String(item.id),
+    name: String(item.name),
+    price: Number(item.price),
+    quantity: Number(item.qty),
+    size: item.selectedSize || null,
+    color: item.selectedColor || null
   }));
 
   const total = items.reduce(
-    (n, x) => n + x.price * x.quantity, 0
+    (sum, item) => sum + item.price * item.quantity,
+    0
   );
 
   const order = {
@@ -272,11 +400,11 @@ $("checkout-form").addEventListener("submit", async e => {
     notes: customer.notes,
     items,
     total,
-    status: "new"
+    status: "pending"
   };
 
-  const orderLines = items.map(x =>
-    `- ${x.name} | العدد: ${x.quantity} | السعر: ${money(x.price * x.quantity)}`
+  const orderLines = items.map(item =>
+    `- ${item.name} | اللون: ${item.color || "غير محدد"} | المقاس: ${item.size || "غير محدد"} | العدد: ${item.quantity} | السعر: ${money(item.price * item.quantity)}`
   ).join("\n");
 
   const message = `طلب جديد من AZAZY CLOTHES
@@ -291,11 +419,11 @@ ${orderLines}
 
 الإجمالي: ${money(total)}`;
 
-  const btn = $("submit-order");
+  const button = $("submit-order");
 
   isSubmitting = true;
-  btn.disabled = true;
-  btn.textContent = "جاري تسجيل الطلب...";
+  button.disabled = true;
+  button.textContent = "جاري تسجيل الطلب...";
   $("checkout-error").textContent = "";
   renderCart();
 
@@ -306,58 +434,48 @@ ${orderLines}
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "apikey": SUPABASE_ANON_KEY,
-        "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
-        "Prefer": "return=minimal"
+        apikey: SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+        Prefer: "return=minimal"
       },
       body: JSON.stringify(order)
     });
 
     if (!response.ok) {
-      const detail = await response.text();
-      throw new Error(detail || `HTTP ${response.status}`);
+      throw new Error(await response.text());
     }
 
-    // وصلنا هنا: Supabase أكد تسجيل الطلب
     orderRegistered = true;
 
-    // تفريغ السلة بعد نجاح التسجيل فقط
     cart = [];
+    save();
+    renderCart();
 
-    try {
-      save();
-      renderCart();
-      checkoutForm.reset();
-      closeCheckout();
-      closeCart();
-    } catch (uiError) {
-      console.error("Post-order display error:", uiError);
-    }
+    checkoutForm.reset();
+    closeCheckout();
+    closeCart();
 
-    // فتح واتساب بعد تسجيل الطلب
     window.location.href =
       `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
 
-  } catch (err) {
-    console.error("AZAZY order submission failed:", err);
+  } catch (error) {
+    console.error("AZAZY order submission:", error);
 
-    if (orderRegistered) {
-      $("checkout-error").textContent =
-        "تم تسجيل طلبك بنجاح، لكن حدثت مشكلة أثناء تجهيز الصفحة. لا تعيد إرسال الطلب.";
-    } else {
-      $("checkout-error").textContent =
-        "فشل تسجيل الطلب: " + (err.message || "خطأ غير معروف") +
-        ". السلة محفوظة؛ حاول مرة أخرى بعد إصلاح السبب.";
-    }
+    $("checkout-error").textContent = orderRegistered
+      ? "تم تسجيل طلبك بنجاح. لا تعيد إرسال الطلب."
+      : "تعذر تأكيد تسجيل الطلب: " +
+        (error.message || "خطأ غير معروف") +
+        ". احتفظ بالسلة وتأكد من الطلب في Supabase قبل إعادة المحاولة.";
 
   } finally {
     isSubmitting = false;
-    btn.disabled = false;
-    btn.textContent = "تأكيد الطلب وإرساله";
+    button.disabled = false;
+    button.textContent = "تأكيد الطلب وإرساله";
     renderCart();
   }
 });
 
+// القائمة الرئيسية
 $("menu-toggle").addEventListener("click", () =>
   $("main-nav").classList.toggle("open")
 );
@@ -370,36 +488,16 @@ $("main-nav").querySelectorAll("a").forEach(a =>
 
 $("year").textContent = new Date().getFullYear();
 
-renderProducts();
+// تشغيل المتجر
 renderCart();
+loadProducts();
 
 window.AZAZYStore = {
-  addProduct(p) {
-    if (!p || !p.name || !Number.isFinite(Number(p.price))) {
-      throw new Error("أدخل اسم المنتج وسعره الصحيح");
-    }
-
-    products.push({
-      id: String(Date.now()),
-      category: "tshirt",
-      sizes: [],
-      ...p,
-      price: Number(p.price)
-    });
-
-    save();
-    renderProducts();
-  },
-
-  removeProduct(id) {
-    const i = products.findIndex(x => String(x.id) === String(id));
-    if (i >= 0) products.splice(i, 1);
-
-    save();
-    renderProducts();
-  },
-
   list() {
     return products;
+  },
+
+  refreshProducts() {
+    return loadProducts();
   }
 };
