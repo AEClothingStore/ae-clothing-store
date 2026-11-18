@@ -3,60 +3,205 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AE CLOTHING — Modern Luxury Streetwear">
-  <title>AE CLOTHING | The Collection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#430008">
+  <meta name="description" content="AZAZY CLOTHES — Wear Your Style">
+  <title>AZAZY CLOTHES | Wear Your Style</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-<header class="header">
-  <a class="logo" href="#home">AE<span>.</span></a>
-  <nav>
-    <a href="#home">الرئيسية</a>
-    <a href="#collections">المجموعة</a>
-    <a href="#about">عن AE</a>
-    <a href="#contact">تواصل</a>
-  </nav>
-  <a class="header-contact" href="https://wa.me/201142336180" target="_blank">تواصل معنا</a>
-</header>
+  <div class="announcement">
+    <span></span>
+    AZAZY CLOTHES — WEAR YOUR STYLE
+    <span></span>
+  </div>
 
-<main>
-  <section id="home" class="hero">
-    <div class="hero-copy">
-      <p class="eyebrow">AE CLOTHING — EST. 2026</p>
-      <h1>BE YOUR<br><span>OWN STANDARD.</span></h1>
-      <p class="hero-ar">أسلوب واضح. تفاصيل محسوبة. حضور من غير مبالغة.</p>
-      <a class="hero-link" href="#collections">اكتشف المجموعة <span>←</span></a>
-    </div>
-    <div class="hero-mark">AE</div>
-  </section>
+  <header class="site-header">
+    <a class="brand" href="#home">
+      <img src="assets/azazy-logo.png" alt="AZAZY CLOTHES">
+    </a>
 
-  <section id="collections" class="section collection">
-    <div class="section-heading">
-      <div>
-        <p class="eyebrow">THE FIRST DROP</p>
-        <h2>مختارات AE</h2>
+    <button class="menu-toggle" id="menu-toggle">☰</button>
+
+    <nav id="main-nav">
+      <a href="#home">الرئيسية</a>
+      <a href="#collection">المجموعة</a>
+      <a href="#story">عن AZAZY</a>
+      <a href="#contact">تواصل معنا</a>
+    </nav>
+
+    <button class="bag-button" id="cart-toggle">
+      السلة <b id="cart-count">0</b>
+    </button>
+  </header>
+
+  <main>
+
+    <section class="hero" id="home">
+      <div class="hero-text">
+        <p class="eyebrow">MODERN MENSWEAR</p>
+
+        <h1>
+          BE YOUR<br>
+          <em>OWN STANDARD.</em>
+        </h1>
+
+        <p class="hero-copy">
+          أسلوب يعبر عنك. تفاصيل بسيطة، حضور لا يُنسى.
+        </p>
+
+        <a class="outline-button" href="#collection">
+          اكتشف المجموعة <span>←</span>
+        </a>
       </div>
-      <p class="section-note">اكتشف القطع المتاحة قريباً</p>
+
+      <div class="hero-mark">
+        <div class="fabric-orbit"></div>
+        <div class="hero-caption">
+          WEAR YOUR STYLE — AZAZY CLOTHES
+        </div>
+      </div>
+
+      <div class="hero-bottom">
+        <span>01 / THE NEW IDENTITY</span>
+        <span>CAIRO · EGYPT</span>
+      </div>
+    </section>
+
+    <section class="promise">
+      <div>
+        <span class="promise-icon">✳</span>
+        <strong>DESIGNED WITH INTENT</strong>
+        <small>تفاصيل مدروسة</small>
+      </div>
+
+      <div>
+        <span class="promise-icon">◇</span>
+        <strong>EVERYDAY ELEGANCE</strong>
+        <small>أناقة لكل يوم</small>
+      </div>
+
+      <div>
+        <span class="promise-icon">↗</span>
+        <strong>YOUR STYLE, YOUR RULES</strong>
+        <small>أسلوبك له بصمته</small>
+      </div>
+    </section>
+
+    <section class="collection section" id="collection">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">THE AZAZY EDIT</p>
+          <h2>OUR COLLECTION</h2>
+        </div>
+        <p>اختار القطعة اللي تشبهك.</p>
+      </div>
+
+      <div class="filters">
+        <input
+          id="search"
+          type="search"
+          placeholder="ابحث عن منتج..."
+        >
+
+        <select id="category">
+          <option value="all">كل المنتجات</option>
+          <option value="tshirt">تيشيرتات</option>
+          <option value="long">كم طويل</option>
+          <option value="hoodie">هوديز</option>
+        </select>
+      </div>
+
+      <div id="products" class="products-grid">
+        <div class="empty-state">
+          <span>AZAZY</span>
+          <h3>قريباً — المجموعة الأولى</h3>
+          <p>
+            نعمل على تجهيز اختياراتنا بعناية.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="brand-story" id="story">
+      <div class="story-image">
+        <img src="assets/azazy-logo.png" alt="AZAZY CLOTHES">
+      </div>
+
+      <div class="story-copy">
+        <p class="eyebrow">A NAME. A STATEMENT.</p>
+
+        <h2>
+          MORE THAN<br>
+          <em>JUST CLOTHES.</em>
+        </h2>
+
+        <p>
+          AZAZY CLOTHES هي رؤية للأناقة الرجالية العصرية؛
+          قطع مختارة بعناية لتمنحك حرية التعبير عن أسلوبك بثقة.
+        </p>
+
+        <a href="#collection" class="text-link">
+          اكتشف AZAZY ←
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <aside class="cart-panel" id="cart">
+    <button class="close-cart" id="cart-close">×</button>
+
+    <p class="eyebrow">YOUR SELECTION</p>
+    <h2>سلة المشتريات</h2>
+
+    <div id="cart-items">
+      السلة فارغة حالياً.
     </div>
-    <div id="products" class="products"></div>
-  </section>
 
-  <section id="about" class="about">
-    <p class="eyebrow">ABOUT THE BRAND</p>
-    <h2>Less, but better.</h2>
-    <p>AE CLOTHING علامة ملابس رجالي بروح عصرية، تجمع بين البساطة والجودة والتفاصيل المدروسة.</p>
-  </section>
-</main>
+    <p id="cart-total" class="cart-total"></p>
 
-<footer id="contact">
-  <a class="logo" href="#home">AE<span>.</span></a>
-  <p>MODERN LUXURY STREETWEAR</p>
-  <a href="https://wa.me/201142336180" target="_blank">تواصل معنا عبر واتساب</a>
-  <small>© <span id="year"></span> AE CLOTHING. All rights reserved.</small>
-</footer>
+    <button id="checkout" class="solid-button">
+      اطلب عبر واتساب
+    </button>
+  </aside>
 
-<script src="app.js"></script>
+  <div class="cart-overlay" id="cart-overlay"></div>
+
+  <footer id="contact">
+    <div class="footer-main">
+      <img src="assets/azazy-logo.png" alt="AZAZY CLOTHES">
+
+      <p>WEAR YOUR STYLE.</p>
+
+      <a
+        class="footer-whatsapp"
+        href="https://wa.me/201142336180"
+        target="_blank"
+        rel="noopener"
+      >
+        تواصل معنا عبر واتساب ↗
+      </a>
+    </div>
+
+    <div class="footer-bottom">
+      <span>
+        © <span id="year"></span> AZAZY CLOTHES.
+        ALL RIGHTS RESERVED.
+      </span>
+
+      <a href="#home">العودة للأعلى ↑</a>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+
 </body>
 </html>
