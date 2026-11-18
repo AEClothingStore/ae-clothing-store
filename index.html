@@ -48,6 +48,133 @@
         height: 100%;
       }
     }
+
+    /* AZAZY Order Success */
+    .azazy-success {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(20, 0, 3, .82);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .azazy-success.show {
+      display: flex;
+    }
+
+    .azazy-success-card {
+      width: 100%;
+      max-width: 430px;
+      padding: 35px 25px;
+      text-align: center;
+      background: #f8f2e9;
+      border: 1px solid #c5a46b;
+      border-radius: 18px;
+      box-shadow: 0 20px 70px rgba(0,0,0,.4);
+      animation: azazySuccessIn .35s ease;
+    }
+
+    @keyframes azazySuccessIn {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(.97);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .azazy-success-icon {
+      width: 68px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      color: #f8f2e9;
+      background: #430008;
+      font-size: 35px;
+      border: 2px solid #c5a46b;
+    }
+
+    .azazy-success-brand {
+      color: #9a7948;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      letter-spacing: 3px;
+      margin-bottom: 12px;
+    }
+
+    .azazy-success-card h2 {
+      color: #430008;
+      font-family: 'Almarai', sans-serif;
+      font-size: 23px;
+      margin: 0 0 12px;
+    }
+
+    .azazy-success-card p {
+      color: #665b55;
+      font-family: 'Almarai', sans-serif;
+      font-size: 14px;
+      line-height: 1.9;
+      margin: 0 0 20px;
+    }
+
+    .azazy-order-number {
+      padding: 15px;
+      margin: 20px 0;
+      border: 1px dashed #b69765;
+      border-radius: 10px;
+      background: #fffaf2;
+    }
+
+    .azazy-order-number span {
+      display: block;
+      color: #796b5c;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .azazy-order-number strong {
+      display: block;
+      direction: ltr;
+      color: #430008;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 25px;
+      letter-spacing: 1px;
+    }
+
+    .azazy-success-button {
+      width: 100%;
+      padding: 14px 20px;
+      border: 0;
+      border-radius: 8px;
+      background: #430008;
+      color: #fff;
+      font-family: 'Almarai', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .azazy-success-button:hover {
+      background: #650d19;
+    }
+
+    .azazy-success-note {
+      display: block;
+      margin-top: 15px;
+      color: #8a7b6a;
+      font-size: 11px;
+    }
   </style>
 </head>
 
@@ -224,8 +351,44 @@
         <p class="checkout-total" id="checkout-total"></p>
         <p class="checkout-error" id="checkout-error" role="alert"></p>
         <button class="solid-button" id="submit-order" type="submit">تأكيد الطلب وإرساله</button>
-        <small class="checkout-secure-note">سيتم تسجيل الطلب أولاً، ثم فتح واتساب لإرسال التفاصيل.</small>
+        <small class="checkout-secure-note">سيتم تسجيل الطلب أولاً، ثم تأكيد نجاحه داخل الموقع.</small>
       </form>
+    </div>
+  </div>
+
+  <!-- نافذة نجاح الطلب داخل الموقع -->
+  <div class="azazy-success" id="azazy-success" aria-hidden="true">
+    <div class="azazy-success-card" role="dialog" aria-modal="true" aria-labelledby="azazy-success-title">
+
+      <div class="azazy-success-icon">✓</div>
+
+      <div class="azazy-success-brand">AZAZY CLOTHES</div>
+
+      <h2 id="azazy-success-title">تم طلبك بنجاح!</h2>
+
+      <p>
+        شكراً لاختيارك AZAZY CLOTHES ❤️
+        <br>
+        تم استلام طلبك بنجاح، وهنبدأ نجهزه ليك.
+      </p>
+
+      <div class="azazy-order-number">
+        <span>رقم طلبك</span>
+        <strong id="azazy-success-order-number">AZ-000000</strong>
+      </div>
+
+      <button
+        type="button"
+        class="azazy-success-button"
+        onclick="closeOrderSuccess()"
+      >
+        متابعة التسوق
+      </button>
+
+      <small class="azazy-success-note">
+        WEAR YOUR STYLE
+      </small>
+
     </div>
   </div>
 
@@ -268,6 +431,30 @@
       <a href="#home">العودة للأعلى ↑</a>
     </div>
   </footer>
+
+  <script>
+    // عرض رسالة نجاح الطلب
+    window.showOrderSuccess = function(orderId) {
+      const modal = document.getElementById("azazy-success");
+      const number = document.getElementById("azazy-success-order-number");
+
+      if (!modal || !number) return;
+
+      number.textContent = String(orderId);
+      modal.classList.add("show");
+      modal.setAttribute("aria-hidden", "false");
+    };
+
+    // إغلاق رسالة نجاح الطلب
+    window.closeOrderSuccess = function() {
+      const modal = document.getElementById("azazy-success");
+
+      if (!modal) return;
+
+      modal.classList.remove("show");
+      modal.setAttribute("aria-hidden", "true");
+    };
+  </script>
 
   <script src="app.js"></script>
 
