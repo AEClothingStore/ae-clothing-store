@@ -13,6 +13,31 @@
   <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* Large logo inside the hero circle */
+    .hero-logo {
+      position: absolute;
+      z-index: 1;
+      right: 58%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 42%;
+      height: min(80vw, 480px);
+      object-fit: contain;
+      border-radius: 50%;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    @media (max-width: 760px) {
+      .hero-logo {
+        right: 38%;
+        width: 62%;
+        height: min(75vw, 360px);
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -25,7 +50,7 @@
 
   <header class="site-header">
     <a class="brand" href="#home">
-      <img src="assets/azazy-logo.png.png" alt="AZAZY CLOTHES">
+      <img src="assets/azazy-logo.png" alt="AZAZY CLOTHES">
     </a>
 
     <button class="menu-toggle" id="menu-toggle">☰</button>
@@ -64,27 +89,17 @@
 
       <div class="hero-mark">
         <div class="fabric-orbit"></div>
-
-        <img
-          src="assets/azazy-logo.png.png"
-          alt="AZAZY CLOTHES Logo"
-          style="
-            position:absolute;
-            z-index:2;
-            top:50%;
-            left:50%;
-            transform:translate(-50%,-50%);
-            width:80%;
-            height:80%;
-            object-fit:contain;
-            mix-blend-mode:screen;
-          "
-        >
-
         <div class="hero-caption">
           WEAR YOUR STYLE — AZAZY CLOTHES
         </div>
       </div>
+
+      <!-- Main AZAZY logo inside the circle -->
+      <img
+        class="hero-logo"
+        src="assets/azazy-logo.png"
+        alt="AZAZY CLOTHES Logo"
+      >
 
       <div class="hero-bottom">
         <span>01 / THE NEW IDENTITY</span>
@@ -141,14 +156,16 @@
         <div class="empty-state">
           <span>AZAZY</span>
           <h3>قريباً — المجموعة الأولى</h3>
-          <p>نعمل على تجهيز اختياراتنا بعناية.</p>
+          <p>
+            نعمل على تجهيز اختياراتنا بعناية.
+          </p>
         </div>
       </div>
     </section>
 
     <section class="brand-story" id="story">
       <div class="story-image">
-        <img src="assets/azazy-logo.png.png" alt="AZAZY CLOTHES">
+        <img src="assets/azazy-logo.png" alt="AZAZY CLOTHES">
       </div>
 
       <div class="story-copy">
@@ -192,7 +209,7 @@
 
   <footer id="contact">
     <div class="footer-main">
-      <img src="assets/azazy-logo.png.png" alt="AZAZY CLOTHES">
+      <img src="assets/azazy-logo.png" alt="AZAZY CLOTHES">
 
       <p>WEAR YOUR STYLE.</p>
 
