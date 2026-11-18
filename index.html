@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -320,6 +321,34 @@
         <button class="solid-button" id="submit-order" type="submit">تأكيد الطلب وإرساله</button>
         <small class="checkout-secure-note">سيتم تسجيل الطلب أولاً، ثم فتح واتساب لإرسال التفاصيل.</small>
       </form>
+    </div>
+  </div>
+
+  <!-- AZAZY ORDER SUCCESS -->
+  <div class="azazy-success" id="azazy-success" aria-hidden="true">
+    <div class="azazy-success-card" role="dialog" aria-modal="true" aria-labelledby="azazy-success-title">
+      <button type="button" class="azazy-success-close"
+        onclick="closeOrderSuccess()" aria-label="إغلاق">×</button>
+
+      <div class="azazy-success-icon">✓</div>
+
+      <p class="eyebrow">AZAZY CLOTHES</p>
+
+      <h2 id="azazy-success-title">تم طلبك بنجاح!</h2>
+
+      <p>
+        شكراً لاختيارك AZAZY CLOTHES ❤️
+        <br>
+        تم استلام طلبك بنجاح، وهنبدأ نجهزه ليك.
+      </p>
+
+      <div class="azazy-order-number">
+        <span>رقم طلبك</span>
+        <strong id="azazy-success-order-number">AZ-000000</strong>
+      </div>
+
+      <button type="button" class="azazy-success-button"
+        onclick="closeOrderSuccess()">متابعة التسوق</button>
     </div>
   </div>
 
