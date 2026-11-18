@@ -48,6 +48,182 @@
         height: 100%;
       }
     }
+
+    /* AZAZY CONTACT FOOTER */
+    .azazy-footer {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background: linear-gradient(145deg, #430008 0%, #270006 55%, #170003 100%);
+      color: #fff;
+      text-align: center;
+      padding: 75px 22px 0;
+    }
+
+    .azazy-footer .footer-glow {
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      background: rgba(155, 35, 48, 0.16);
+      filter: blur(100px);
+      border-radius: 50%;
+      top: -220px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .azazy-footer .footer-main {
+      position: relative;
+      max-width: 650px;
+      margin: auto;
+      padding-bottom: 65px;
+    }
+
+    .azazy-footer .footer-main img {
+      width: 145px;
+      max-width: 45%;
+      height: auto;
+      object-fit: contain;
+      margin-bottom: 12px;
+      transition: transform 0.4s ease;
+    }
+
+    .azazy-footer .footer-main img:hover {
+      transform: scale(1.05);
+    }
+
+    .azazy-footer .footer-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      letter-spacing: 4px;
+      color: #d9b77a;
+      margin: 0;
+    }
+
+    .azazy-footer .footer-line {
+      display: block;
+      width: 55px;
+      height: 1px;
+      background: #c8a46a;
+      margin: 25px auto;
+    }
+
+    .azazy-footer .footer-main h3 {
+      font-family: 'Almarai', sans-serif;
+      font-size: 23px;
+      font-weight: 800;
+      margin: 0 0 14px;
+      color: #fff;
+    }
+
+    .azazy-footer .footer-description {
+      font-family: 'Almarai', sans-serif;
+      font-size: 14px;
+      line-height: 2;
+      color: rgba(255,255,255,0.68);
+      margin: 0 auto 28px;
+    }
+
+    .azazy-footer .footer-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-height: 54px;
+      padding: 0 27px;
+      border: 1px solid #c8a46a;
+      border-radius: 4px;
+      background: linear-gradient(120deg, #c8a46a, #e2c995);
+      color: #300006;
+      font-family: 'Almarai', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .azazy-footer .footer-whatsapp:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 13px 30px rgba(0,0,0,0.3);
+    }
+
+    .azazy-footer .whatsapp-icon {
+      font-size: 21px;
+    }
+
+    .azazy-footer .footer-arrow {
+      font-size: 18px;
+    }
+
+    .azazy-footer .footer-note {
+      display: block;
+      margin-top: 25px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: rgba(255,255,255,0.38);
+    }
+
+    .azazy-footer .footer-bottom {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      max-width: 1150px;
+      margin: auto;
+      padding: 22px 0;
+      border-top: 1px solid rgba(200,164,106,0.22);
+      color: rgba(255,255,255,0.55);
+      font-size: 11px;
+      direction: ltr;
+    }
+
+    .azazy-footer .footer-bottom a {
+      color: #d9b77a;
+      text-decoration: none;
+      direction: rtl;
+      transition: color 0.3s ease;
+    }
+
+    .azazy-footer .footer-bottom a:hover {
+      color: #fff;
+    }
+
+    @media (max-width: 600px) {
+      .azazy-footer {
+        padding: 55px 18px 0;
+      }
+
+      .azazy-footer .footer-main {
+        padding-bottom: 45px;
+      }
+
+      .azazy-footer .footer-main h3 {
+        font-size: 19px;
+      }
+
+      .azazy-footer .footer-description {
+        font-size: 13px;
+      }
+
+      .azazy-footer .footer-whatsapp {
+        width: 100%;
+        max-width: 290px;
+        box-sizing: border-box;
+      }
+
+      .azazy-footer .footer-bottom {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        line-height: 1.8;
+        direction: rtl;
+      }
+    }
   </style>
 </head>
 
@@ -209,11 +385,23 @@
 
   <div class="cart-overlay" id="cart-overlay"></div>
 
-  <footer id="contact">
+  <footer id="contact" class="azazy-footer">
+
+    <div class="footer-glow"></div>
+
     <div class="footer-main">
+
       <img src="assets/azazy-logo.png" alt="AZAZY CLOTHES">
 
-      <p>WEAR YOUR STYLE.</p>
+      <p class="footer-tagline">WEAR YOUR STYLE.</p>
+
+      <span class="footer-line"></span>
+
+      <h3>خلّيك دايمًا على تواصل معانا</h3>
+
+      <p class="footer-description">
+        استفسارك يهمنا، وفريق AZAZY جاهز يساعدك تختار أسلوبك.
+      </p>
 
       <a
         class="footer-whatsapp"
@@ -221,18 +409,26 @@
         target="_blank"
         rel="noopener"
       >
-        تواصل معنا عبر واتساب ↗
+        <span class="whatsapp-icon">✆</span>
+        تواصل معنا عبر واتساب
+        <span class="footer-arrow">↗</span>
       </a>
+
+      <span class="footer-note">WE ARE HERE FOR YOU</span>
+
     </div>
 
     <div class="footer-bottom">
+
       <span>
         © <span id="year"></span> AZAZY CLOTHES.
         ALL RIGHTS RESERVED.
       </span>
 
       <a href="#home">العودة للأعلى ↑</a>
+
     </div>
+
   </footer>
 
   <script src="app.js"></script>
