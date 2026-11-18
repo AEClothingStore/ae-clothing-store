@@ -1,5 +1,5 @@
 
-// AZAZY CLOTHES — Shared Products + Cart + Checkout
+// AZAZY CLOTHES — Shared Products + Cart + Checkout + Order Success
 
 const WHATSAPP = "201142336180";
 
@@ -34,6 +34,44 @@ function getCartTotal() {
     0
   );
 }
+
+// نافذة نجاح الطلب
+window.showOrderSuccess = function(orderId) {
+  const modal = $("azazy-success");
+  const number = $("azazy-success-order-number");
+
+  if (!modal || !number) {
+    alert("تم تسجيل طلبك بنجاح! رقم الطلب: " + orderId);
+    return;
+  }
+
+  number.textContent = String(orderId);
+  modal.classList.add("show");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+};
+
+window.closeOrderSuccess = function() {
+  const modal = $("azazy-success");
+  if (!modal) return;
+
+  modal.classList.remove("show");
+  modal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+};
+
+// إغلاق نافذة النجاح عند الضغط على الخلفية أو Escape
+document.addEventListener("click", e => {
+  if (e.target === $("azazy-success")) {
+    window.closeOrderSuccess();
+  }
+});
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") {
+    window.closeOrderSuccess();
+  }
+});
 
 // تحميل المنتجات من Supabase
 async function loadProducts() {
@@ -443,13 +481,8 @@ $("checkout-form").addEventListener("submit", async e => {
     closeCheckout();
     closeCart();
 
-    // عرض رسالة النجاح داخل الموقع
-    if (typeof window.showOrderSuccess === "function") {
-      window.showOrderSuccess(orderId);
-    } else {
-      $("checkout-error").textContent =
-        "تم تسجيل الطلب بنجاح. رقم الطلب: " + orderId;
-    }
+    // عرض رسالة النجاح ورقم الطلب الحقيقي
+    window.showOrderSuccess(orderId);
 
   } catch (error) {
     console.error("AZAZY order submission:", error);
