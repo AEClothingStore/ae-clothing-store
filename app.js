@@ -1,5 +1,6 @@
 
-// AZAZY CLOTHES — checkout + order registration
+// AZAZY CLOTHES — checkout + order registration + cart controls
+
 const WHATSAPP = "201142336180";
 
 const SUPABASE_URL = "https://xrwimmluzcnqwesrnneq.supabase.co";
@@ -7,12 +8,29 @@ const SUPABASE_ANON_KEY = "sb_publishable_85R3ZtthylCEA_MYU5oYcw_bjUh-LGy";
 
 const products = JSON.parse(localStorage.getItem("azazy_products") || "[]");
 let cart = JSON.parse(localStorage.getItem("azazy_cart") || "[]");
+
 const $ = (id) => document.getElementById(id);
 const money = (n) => `${Number(n).toLocaleString("en-US")} ج.م`;
+
+let isSubmitting = false;
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
 
 function save() {
   localStorage.setItem("azazy_products", JSON.stringify(products));
   localStorage.setItem("azazy_cart", JSON.stringify(cart));
+}
+
+function getCartTotal() {
+  return cart.reduce((n, x) => n + Number(x.price) * Number(x.qty), 0);
 }
 
 function renderProducts() {
@@ -27,12 +45,12 @@ function renderProducts() {
   $("products").innerHTML = shown.length
     ? shown.map(p => `
       <article class="product-card">
-        ${p.image ? `<img src="${p.image}" alt="${p.name}">` : ""}
-        <h3>${p.name}</h3>
-        <p>${p.description || ""}</p>
+        ${p.image ? `<img src="${escapeHTML(p.image)}" alt="${escapeHTML(p.name)}">` : ""}
+        <h3>${escapeHTML(p.name)}</h3>
+        <p>${escapeHTML(p.description || "")}</p>
         <p class="price">${money(p.price)}</p>
-        <p>المقاسات: ${(p.sizes || []).join("، ")}</p>
-        <button type="button" data-add="${p.id}">أضف للسلة</button>
+        <p>المقاسات: ${(p.sizes || []).map(escapeHTML).join("، ")}</p>
+        <button type="button" data-add="${escapeHTML(p.id)}">أضف للسلة</button>
       </article>
     `).join("")
     : `<div class="empty-state">
@@ -43,23 +61,93 @@ function renderProducts() {
 }
 
 function renderCart() {
-  $("cart-count").textContent = cart.reduce((n, x) => n + x.qty, 0);
+  $("cart-count").textContent = cart.reduce(
+    (n, x) => n + Number(x.qty), 0
+  );
 
   $("cart-items").innerHTML = cart.length
-    ? cart.map(x => `<p>${x.name} × ${x.qty} — ${money(x.price * x.qty)}</p>`).join("")
+    ? cart.map(x => `
+      <div class="cart-item">
+        <p>
+          <strong>${escapeHTML(x.name)}</strong>
+          <br>
+          ${money(x.price)} × ${Number(x.qty)}
+          <br>
+          الإجمالي: ${money(Number(x.price) * Number(x.qty))}
+        </p>
+
+        <div class="cart-item-controls">
+          <button type="button"
+            data-cart-action="increase"
+            data-cart-id="${escapeHTML(x.id)}"
+            ${isSubmitting ? "disabled" : ""}>+</button>
+
+          <span>${Number(x.qty)}</span>
+
+          <button type="button"
+            data-cart-action="decrease"
+            data-cart-id="${escapeHTML(x.id)}"
+            ${isSubmitting ? "disabled" : ""}>−</button>
+
+          <button type="button"
+            data-cart-action="remove"
+            data-cart-id="${escapeHTML(x.id)}"
+            ${isSubmitting ? "disabled" : ""}>حذف</button>
+        </div>
+      </div>
+    `).join("")
     : "السلة فارغة حالياً.";
 
   $("cart-total").textContent = cart.length
-    ? "الإجمالي: " + money(cart.reduce((n, x) => n + x.price * x.qty, 0))
+    ? "الإجمالي: " + money(getCartTotal())
     : "";
+
+  if ($("checkout-total")) {
+    $("checkout-total").textContent = cart.length
+      ? "إجمالي الطلب: " + money(getCartTotal())
+      : "";
+  }
 }
 
 function addToCart(id) {
+  if (isSubmitting) return;
+
   const p = products.find(x => String(x.id) === String(id));
   if (!p) return;
 
   const found = cart.find(x => String(x.id) === String(id));
-  found ? found.qty++ : cart.push({ ...p, qty: 1 });
+
+  if (found) {
+    found.qty = Number(found.qty) + 1;
+  } else {
+    cart.push({ ...p, qty: 1 });
+  }
+
+  save();
+  renderCart();
+}
+
+function updateCartItem(id, action) {
+  if (isSubmitting) return;
+
+  const index = cart.findIndex(x => String(x.id) === String(id));
+  if (index === -1) return;
+
+  if (action === "increase") {
+    cart[index].qty = Number(cart[index].qty) + 1;
+  }
+
+  if (action === "decrease") {
+    cart[index].qty = Number(cart[index].qty) - 1;
+
+    if (cart[index].qty <= 0) {
+      cart.splice(index, 1);
+    }
+  }
+
+  if (action === "remove") {
+    cart.splice(index, 1);
+  }
 
   save();
   renderCart();
@@ -68,6 +156,13 @@ function addToCart(id) {
 $("products").addEventListener("click", e => {
   const btn = e.target.closest("[data-add]");
   if (btn) addToCart(btn.dataset.add);
+});
+
+$("cart-items").addEventListener("click", e => {
+  const btn = e.target.closest("[data-cart-action]");
+  if (!btn) return;
+
+  updateCartItem(btn.dataset.cartId, btn.dataset.cartAction);
 });
 
 $("search").addEventListener("input", renderProducts);
@@ -94,7 +189,7 @@ function openCheckout() {
   }
 
   $("checkout-total").textContent =
-    "إجمالي الطلب: " + money(cart.reduce((n, x) => n + Number(x.price) * x.qty, 0));
+    "إجمالي الطلب: " + money(getCartTotal());
 
   $("checkout-error").textContent = "";
   $("checkout-modal").classList.add("open");
@@ -123,6 +218,11 @@ function supabaseReady() {
 $("checkout-form").addEventListener("submit", async e => {
   e.preventDefault();
 
+  // الاحتفاظ بمرجع النموذج قبل await لحل مشكلة reset
+  const checkoutForm = e.currentTarget;
+
+  if (isSubmitting) return;
+
   if (!cart.length) {
     $("checkout-error").textContent = "السلة فارغة. أضف منتجاً أولاً.";
     return;
@@ -133,7 +233,7 @@ $("checkout-form").addEventListener("submit", async e => {
     return;
   }
 
-  const form = new FormData(e.currentTarget);
+  const form = new FormData(checkoutForm);
 
   const customer = {
     name: String(form.get("customer_name") || "").trim(),
@@ -143,11 +243,14 @@ $("checkout-form").addEventListener("submit", async e => {
     notes: String(form.get("notes") || "").trim()
   };
 
-  if (!customer.name || !customer.phone || !customer.governorate || !customer.address) {
-    $("checkout-error").textContent = "من فضلك أكمل كل البيانات المطلوبة.";
+  if (!customer.name || !customer.phone ||
+      !customer.governorate || !customer.address) {
+    $("checkout-error").textContent =
+      "من فضلك أكمل كل البيانات المطلوبة.";
     return;
   }
 
+  // أخذ نسخة ثابتة من المنتجات وقت تأكيد الطلب
   const items = cart.map(x => ({
     product_id: String(x.id),
     name: String(x.name),
@@ -157,7 +260,9 @@ $("checkout-form").addEventListener("submit", async e => {
     color: x.selectedColor || null
   }));
 
-  const total = items.reduce((n, x) => n + x.price * x.quantity, 0);
+  const total = items.reduce(
+    (n, x) => n + x.price * x.quantity, 0
+  );
 
   const order = {
     customer_name: customer.name,
@@ -170,10 +275,31 @@ $("checkout-form").addEventListener("submit", async e => {
     status: "new"
   };
 
+  const orderLines = items.map(x =>
+    `- ${x.name} | العدد: ${x.quantity} | السعر: ${money(x.price * x.quantity)}`
+  ).join("\n");
+
+  const message = `طلب جديد من AZAZY CLOTHES
+الاسم: ${customer.name}
+الموبايل: ${customer.phone}
+المحافظة: ${customer.governorate}
+العنوان: ${customer.address}
+ملاحظات: ${customer.notes || "لا يوجد"}
+
+المنتجات:
+${orderLines}
+
+الإجمالي: ${money(total)}`;
+
   const btn = $("submit-order");
+
+  isSubmitting = true;
   btn.disabled = true;
   btn.textContent = "جاري تسجيل الطلب...";
   $("checkout-error").textContent = "";
+  renderCart();
+
+  let orderRegistered = false;
 
   try {
     const response = await fetch(`${SUPABASE_URL}/rest/v1/orders`, {
@@ -192,45 +318,43 @@ $("checkout-form").addEventListener("submit", async e => {
       throw new Error(detail || `HTTP ${response.status}`);
     }
 
-    const orderLines = items.map(x =>
-      `- ${x.name} | العدد: ${x.quantity} | السعر: ${money(x.price * x.quantity)}`
-    ).join("\n");
+    // وصلنا هنا: Supabase أكد تسجيل الطلب
+    orderRegistered = true;
 
-    const message = `طلب جديد من AZAZY CLOTHES
-الاسم: ${customer.name}
-الموبايل: ${customer.phone}
-المحافظة: ${customer.governorate}
-العنوان: ${customer.address}
-ملاحظات: ${customer.notes || "لا يوجد"}
-
-المنتجات:
-${orderLines}
-
-الإجمالي: ${money(total)}`;
-
-    // تفريغ السلة بعد نجاح تسجيل الطلب فقط
+    // تفريغ السلة بعد نجاح التسجيل فقط
     cart = [];
-    save();
-    renderCart();
 
-    e.currentTarget.reset();
-    closeCheckout();
-    closeCart();
+    try {
+      save();
+      renderCart();
+      checkoutForm.reset();
+      closeCheckout();
+      closeCart();
+    } catch (uiError) {
+      console.error("Post-order display error:", uiError);
+    }
 
+    // فتح واتساب بعد تسجيل الطلب
     window.location.href =
       `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
 
   } catch (err) {
     console.error("AZAZY order submission failed:", err);
 
-    // الاحتفاظ بالسلة عند فشل تسجيل الطلب
-    $("checkout-error").textContent =
-      "فشل تسجيل الطلب: " + (err.message || "خطأ غير معروف") +
-      ". السلة محفوظة؛ حاول مرة أخرى بعد إصلاح السبب.";
+    if (orderRegistered) {
+      $("checkout-error").textContent =
+        "تم تسجيل طلبك بنجاح، لكن حدثت مشكلة أثناء تجهيز الصفحة. لا تعيد إرسال الطلب.";
+    } else {
+      $("checkout-error").textContent =
+        "فشل تسجيل الطلب: " + (err.message || "خطأ غير معروف") +
+        ". السلة محفوظة؛ حاول مرة أخرى بعد إصلاح السبب.";
+    }
 
   } finally {
+    isSubmitting = false;
     btn.disabled = false;
     btn.textContent = "تأكيد الطلب وإرساله";
+    renderCart();
   }
 });
 
@@ -239,7 +363,9 @@ $("menu-toggle").addEventListener("click", () =>
 );
 
 $("main-nav").querySelectorAll("a").forEach(a =>
-  a.addEventListener("click", () => $("main-nav").classList.remove("open"))
+  a.addEventListener("click", () =>
+    $("main-nav").classList.remove("open")
+  )
 );
 
 $("year").textContent = new Date().getFullYear();
