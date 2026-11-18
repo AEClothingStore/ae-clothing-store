@@ -16,6 +16,22 @@ function save(){
   localStorage.setItem("azazy_cart",JSON.stringify(cart));
 }
 
+// المنتج الأول — AZAZY CLOTHES
+const firstProduct = {
+  id: "azazy-hoodie-black-001",
+  name: "هودي أسود",
+  description: "هودي بتصميم عربي مميز بطباعة أمامية وخلفية",
+  price: 700,
+  category: "tshirt",
+  image: "assets/hoodie-black.png",
+  sizes: ["M", "XL", "2XL"]
+};
+
+if (!products.some(p => String(p.id) === firstProduct.id)) {
+  products.unshift(firstProduct);
+  save();
+}
+
 function renderProducts(){
   const term=( $("search")?.value || "").trim().toLowerCase();
   const cat=$("category")?.value||"all";
