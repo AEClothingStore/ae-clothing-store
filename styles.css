@@ -114,3 +114,105 @@ footer{padding:45px 8% 20px;background:#210004}
 .footer-main{flex-direction:column;text-align:center}
 .footer-bottom{gap:12px;flex-direction:column;align-items:center;text-align:center}
 }
+
+/* AZAZY - Premium Contact Footer */
+footer {
+  padding: 55px 8% 24px;
+  background: linear-gradient(145deg, #260005, #390008);
+}
+
+.footer-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding-bottom: 38px;
+}
+
+.footer-main img {
+  width: 155px;
+  height: 95px;
+  object-fit: contain;
+  mix-blend-mode: screen;
+  transition: transform .35s ease;
+}
+
+.footer-main img:hover {
+  transform: scale(1.06);
+}
+
+.footer-main p {
+  font: 12px var(--serif);
+  letter-spacing: 4px;
+  color: #d8bdad;
+}
+
+.footer-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 190px;
+  padding: 15px 24px;
+  border: 1px solid rgba(244,233,220,.4);
+  border-radius: 3px;
+  color: #f4e9dc;
+  font-size: 12px;
+  transition: all .3s ease;
+}
+
+.footer-whatsapp:hover {
+  background: #f4e9dc;
+  color: #430008;
+  border-color: #f4e9dc;
+  transform: translateY(-3px);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(244,233,220,.18);
+  padding-top: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  color: #c9b7aa;
+  font: 11px var(--serif);
+  letter-spacing: 1px;
+}
+
+.footer-bottom a {
+  transition: color .25s ease;
+}
+
+.footer-bottom a:hover {
+  color: #fff;
+}
+
+@media (max-width: 760px) {
+  footer {
+    padding: 42px 6% 22px;
+  }
+
+  .footer-main {
+    flex-direction: column;
+    text-align: center;
+    gap: 18px;
+    padding-bottom: 30px;
+  }
+
+  .footer-main img {
+    width: 145px;
+    height: 85px;
+  }
+
+  .footer-whatsapp {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    line-height: 2;
+  }
+}
